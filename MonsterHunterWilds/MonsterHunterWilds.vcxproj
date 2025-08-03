@@ -155,6 +155,7 @@
     <ClInclude Include="SkillIcon.h" />
     <ClInclude Include="SkillRank.h" />
     <ClInclude Include="SwitchAxe.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="WeaponCrafting.h" />
     <ClInclude Include="WeaponDamage.h" />
     <ClInclude Include="WeaponElement.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="SkillIcon.cpp" />
     <ClCompile Include="SkillRank.cpp" />
     <ClCompile Include="SwitchAxe.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="WeaponCrafting.cpp" />
     <ClCompile Include="WeaponDamage.cpp" />
     <ClCompile Include="WeaponElement.cpp" />

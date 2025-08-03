@@ -5,14 +5,16 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct SkillIcon : SkillIconT<SkillIcon>
     {
-        SkillIcon(int32_t game_id, winrt::MonsterHunterWilds::SkillKind const& kind);
+        static winrt::MonsterHunterWilds::SkillIcon Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
+        SkillIcon(int32_t game_id, winrt::MonsterHunterWilds::SkillIconKind const& kind);
 
         int32_t GameId();
-        winrt::MonsterHunterWilds::SkillKind Kind();
+        winrt::MonsterHunterWilds::SkillIconKind Kind();
 
     private:
         int32_t game_id_;
-		winrt::MonsterHunterWilds::SkillKind kind_;
+		winrt::MonsterHunterWilds::SkillIconKind kind_;
     };
 }
 

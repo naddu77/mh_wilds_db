@@ -9,16 +9,38 @@ namespace MonsterHunterWilds
         Group
     };
 
+    enum SkillIconKind
+    {
+        Affinity,
+        Attack,
+        Defense,
+        Element,
+        Gathering,
+        Group,
+        Handicraft,
+        Health,
+        Item,
+        Offense,
+        Ranged,
+        Set,
+        Stamina,
+        Utility
+    };
+
     runtimeclass SkillIcon
     {
-        SkillIcon(Int32 game_id, SkillKind kind);
+        static SkillIcon Parse(Windows.Data.Json.JsonObject json_object);
+
+        SkillIcon(Int32 game_id, SkillIconKind kind);
 
         Int32 GameId{ get; };
-        SkillKind Kind{ get; };
+        SkillIconKind Kind{ get; };
     }
 
     runtimeclass SkillRank
     {
+        static SkillRank Parse(Windows.Data.Json.JsonObject json_object);
+
 		SkillRank(Int32 id, String name, String description, Int32 level);
 
 		Int32 Id{ get; };
@@ -29,6 +51,8 @@ namespace MonsterHunterWilds
 
     runtimeclass Skill
     {
+        static Skill Parse(Windows.Data.Json.JsonObject json_object);
+
 		Skill(Int32 id, String name, String description, Windows.Foundation.Collections.IVector<SkillRank> ranks, SkillKind kind, SkillIcon icon);
 
 		Int32 Id{ get; };
@@ -875,6 +899,8 @@ namespace MonsterHunterWilds
         static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsAsync();
         static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsAsync();
         static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsAsync();
+
+        static Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > ParseSkillsAsync();
 
         static SkillRank TestSkillRank();
 

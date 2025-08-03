@@ -53,6 +53,7 @@
     <ClCompile Include="WeaponElement.cpp" />
     <ClCompile Include="WeaponSeries.cpp" />
     <ClCompile Include="WeaponStatus.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="WeaponElement.h" />
     <ClInclude Include="WeaponSeries.h" />
     <ClInclude Include="WeaponStatus.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />

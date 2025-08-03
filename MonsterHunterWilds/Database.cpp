@@ -4,6 +4,8 @@
 #include "Database.g.cpp"
 #endif
 
+#include "Util.h"
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -11,91 +13,6 @@ import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
-    template <typename T>
-    inline auto constexpr always_false{ false };
-
-    template <winrt::Windows::Data::Json::JsonValueType Type>
-    auto TryGetValue(winrt::Windows::Data::Json::JsonObject const& json, winrt::hstring const& name)
-    {
-        if constexpr (Type == winrt::Windows::Data::Json::JsonValueType::String)
-        {
-            if (json.HasKey(name))
-            {
-                auto named_value{ json.GetNamedValue(name) };
-
-                return named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::String
-                    ? std::optional{ named_value.GetString() }
-                    : std::nullopt;
-            }
-
-            return std::optional<winrt::hstring>{};
-        }
-        else if constexpr (Type == winrt::Windows::Data::Json::JsonValueType::Number)
-        {
-            if (json.HasKey(name))
-            {
-                auto named_value{ json.GetNamedValue(name) };
-
-                return named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::Number
-                    ? std::optional{ named_value.GetNumber() }
-                    : std::nullopt;
-            }
-
-            return std::optional<double>{};
-        }
-        else if constexpr (Type == winrt::Windows::Data::Json::JsonValueType::Boolean)
-        {
-            if (json.HasKey(name))
-            {
-                auto named_value{ json.GetNamedValue(name) };
-
-                return named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::Boolean
-                    ? std::optional{ named_value.GetBoolean() }
-                    : std::nullopt;
-            }
-
-		    return std::optional<bool>{};
-        }
-        else if constexpr (Type == winrt::Windows::Data::Json::JsonValueType::Object)
-        {
-            if (json.HasKey(name))
-            {
-                auto named_value{ json.GetNamedValue(name) };
-
-                return named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::Object
-                    ? std::optional{ named_value.GetObject() }
-                    : std::nullopt;
-            }
-
-		    return std::optional<winrt::Windows::Data::Json::JsonObject>{};
-	    }
-        else if constexpr (Type == winrt::Windows::Data::Json::JsonValueType::Array)
-        {
-            if (json.HasKey(name))
-            {
-                auto named_value{ json.GetNamedValue(name) };
-
-                return named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::Array
-                    ? std::optional{ named_value.GetArray() }
-                    : std::nullopt;
-            }
-
-		    return std::optional<winrt::Windows::Data::Json::JsonArray>{};
-        }
-        else
-        {
-            static_assert(always_false<Type>, "Unsupported JsonValueType for TryGetValue");
-        }
-    }
-
-    template <typename Func>
-    auto ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& array, Func&& transformer)
-    {
-        return array
-            | std::views::transform(transformer)
-            | std::ranges::to<std::vector>();
-    }
-
     winrt::Windows::Foundation::IAsyncOperation<winrt::hstring> Database::GetVersionAsync()
     {
         winrt::Windows::Web::Http::HttpClient http_client;
@@ -157,6 +74,14 @@ namespace winrt::MonsterHunterWilds::implementation
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetDecorationsAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/decorations");
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::ParseSkillsAsync()
+    {
+        auto skills_json_object{ co_await GetSkillsAsync() };
+        auto skills{ ParseJsonArray(skills_json_object, [](auto const& json) { return Skill::Parse(json.GetObject()); }) };
+
+        co_return winrt::single_threaded_vector<winrt::MonsterHunterWilds::Skill>(std::move(skills));
     }
 
     SkillRank Database::TestSkillRank()

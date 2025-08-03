@@ -1,10 +1,14 @@
 #pragma once
 #include "Skill.g.h"
+#include "SkillRank.h"
+#include "SkillIcon.h"
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     struct Skill : SkillT<Skill>
     {
+        static winrt::MonsterHunterWilds::Skill Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         Skill(
             int32_t id,
             hstring const& name,

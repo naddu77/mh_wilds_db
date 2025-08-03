@@ -2,8 +2,20 @@
 #include "SkillRank.h"
 #include "SkillRank.g.cpp"
 
+#include "Util.h"
+
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::SkillRank SkillRank::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            TryGetNamedString(json_object, L"name"),
+            json_object.GetNamedString(L"description"),
+            static_cast<int32_t>(json_object.GetNamedNumber(L"level"))
+        };
+    }
+
     SkillRank::SkillRank(int32_t id, hstring const& name, hstring const& description, int32_t level)
         : id_{ id }, name_{ name }, description_{ description }, level_{ level }
     {
