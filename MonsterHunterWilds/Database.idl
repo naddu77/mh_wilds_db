@@ -1,0 +1,883 @@
+namespace MonsterHunterWilds
+{
+    // Skills
+    enum SkillKind
+    {
+        Armor,
+        Weapon,
+        Set,
+        Group
+    };
+
+    runtimeclass SkillIcon
+    {
+        SkillIcon(Int32 game_id, SkillKind kind);
+
+        Int32 GameId{ get; };
+        SkillKind Kind{ get; };
+    }
+
+    runtimeclass SkillRank
+    {
+		SkillRank(Int32 id, String name, String description, Int32 level);
+
+		Int32 Id{ get; };
+	    String Name{ get; };
+		String Description{ get; };
+		Int32 Level{ get; };
+    }
+
+    runtimeclass Skill
+    {
+		Skill(Int32 id, String name, String description, Windows.Foundation.Collections.IVector<SkillRank> ranks, SkillKind kind, SkillIcon icon);
+
+		Int32 Id{ get; };
+	    String Name{ get; };
+		String Description{ get; };
+		Windows.Foundation.Collections.IVector<SkillRank> Ranks{ get; };
+		SkillKind Kind{ get; };
+		SkillIcon Icon{ get; };
+    }
+
+    // Items
+    runtimeclass ItemRecipe
+    {
+        ItemRecipe(Int32 id, Int32 amount, Windows.Foundation.Collections.IVector<Item> inputs);
+
+		Int32 Id{ get; };
+	    Int32 Amount{ get; };
+		Windows.Foundation.Collections.IVector<Item> Inputs{ get; };
+    }
+
+    enum Color
+    {
+        White,
+        Gray,
+        Rose,
+        Pink,
+        Red,
+        Vermilion,
+        Orange,
+        Brwon,
+        Ivory,
+        Yellow,
+        Lemon,
+        SageGreen,
+        MossGreen,
+        Green,
+        Emerald,
+        Sky,
+        Blue,
+        Ultramarine,
+        BluePurple,
+        Purple,
+		DarkPurple
+	};
+
+    enum ItemIconKind
+    {
+        AmmoBasic,
+        AmmoHeavy,
+        AmmoSlug,
+        AmmoSpecial,
+        AmmoUtility,
+        ArmorSphere,
+        Barrel,
+        Binoculars,
+        Bone,
+        Bug,
+        CampingKit,
+        CaptureNet,
+        Certificate,
+        Claw,
+        Coin,
+        CookingCheese,
+        CookingEgg,
+        CookingGarlic,
+        CookingMushroom,
+        CookingShellfish,
+        Crystal,
+        Curative,
+        Drug,
+        Egg,
+        Extract,
+        FishingRod,
+        Fish,
+        Gem,
+        Grill,
+        Hide,
+        Honey,
+        Mantle,
+        Meat,
+        Medulla,
+        Mushroom,
+        MysteryArtian,
+        MysteryDecoration,
+        MysteryMaterial,
+        Nut,
+        Ore,
+        Phial,
+        Pill,
+        Plant,
+        Plate,
+        Poop,
+        Potion,
+        Powder,
+        Question,
+        Scale,
+        Seed,
+        Shell,
+        Skull,
+        SlingerAmmo,
+        Smoke,
+        Sprout,
+        Tail,
+        Trap,
+        TrapTool,
+        Voucher,
+        Web,
+        Whetstone,
+        Wing,
+        Knife
+    };
+
+    runtimeclass ItemIcon
+    {
+        ItemIcon(Int32 game_id, ItemIconKind name, Windows.Foundation.IReference<Int32> color_id, Color color);
+
+		Int32 GameId{ get; };
+        ItemIconKind Name{ get; };
+		Windows.Foundation.IReference<Int32> ColorId{ get; };
+		Color Color{ get; };
+    }
+
+    runtimeclass Item
+    {
+        Item(Int32 id, Int32 game_id, String name, String description, Int32 rarity, Int32 carry_limit, Int32 the_value, Windows.Foundation.Collections.IVector<ItemRecipe> recipes, ItemIcon icon);
+
+        Int32 Id{ get; };
+        Int32 GameId{ get; };
+        String Name{ get; };
+        String Description{ get; };
+        Int32 Rarity{ get; };
+        Int32 CarryLimit{ get; };
+        Int32 Value{ get; };
+        Windows.Foundation.Collections.IVector<ItemRecipe> Recipes{ get; };
+        ItemIcon Icon{ get; };
+    }
+
+    // Armor
+    enum ArmorKind
+    {
+        Head,
+        Chest,
+        Arms,
+        Waist,
+        Legs
+	};
+
+    runtimeclass ArmorDefense
+    {
+        ArmorDefense(Int32 base, Int32 max);
+
+		Int32 Base{ get; };
+	    Int32 Max{ get; };
+    }
+
+    runtimeclass ArmorResistances
+    {
+        ArmorResistances(Int32 fire, Int32 water, Int32 ice, Int32 thunder, Int32 dragon);
+
+		Int32 Fire{ get; };
+	    Int32 Water{ get; };
+		Int32 Ice{ get; };
+		Int32 Thunder{ get; };
+		Int32 Dragon{ get; };
+    }
+
+    runtimeclass ArmorCrafting
+    {
+		ArmorCrafting(Int32 id, Int32 zenny_cost, Windows.Foundation.Collections.IVector<Item> materials);
+
+		Int32 Id{ get; };
+	    Int32 ZennyCost{ get; };
+        Windows.Foundation.Collections.IVector<Item> Materials{ get; };
+    }
+
+    enum Rank
+    {
+        Low,
+        High,
+        Master
+	};
+
+    runtimeclass Armor
+    {
+        Armor(Int32 id, String name, String description, ArmorKind kind, Rank rank, Int32 rarity, ArmorDefense defense, ArmorResistances resistances, Windows.Foundation.Collections.IVector<Int32> slots, Windows.Foundation.Collections.IVector<SkillRank> skills, ArmorSet armor_set, ArmorCrafting crafting);
+
+        Int32 Id{ get; };        
+        String Name{ get; };
+        String Description{ get; };
+        ArmorKind Kind{ get; };
+		Rank Rank{ get; };
+        Int32 Rarity{ get; };
+        ArmorDefense Defense{ get; };
+        ArmorResistances Resistances{ get; };
+        Windows.Foundation.Collections.IVector<Int32> Slots{ get; };
+		Windows.Foundation.Collections.IVector<SkillRank> Skills{ get; };
+		ArmorSet ArmorSet{ get; };
+		ArmorCrafting Crafting{ get; };
+    }
+
+    // Armor Sets
+    runtimeclass ArmorSetBonusRank
+    {
+        ArmorSetBonusRank(Int32 id, Int32 pieces, SkillRank skill);
+
+        Int32 Id{ get; };
+        Int32 Pieces{ get; };
+        SkillRank Skill{ get; };
+    }
+
+    runtimeclass ArmorSetBonus
+    {
+        ArmorSetBonus(Int32 id, Skill skill, Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ranks);
+
+		Int32 Id{ get; };
+	    Skill Skill{ get; };
+		Windows.Foundation.Collections.IVector<ArmorSetBonusRank> Ranks{ get; };
+    }
+
+    runtimeclass ArmorSet
+    {
+        ArmorSet(Int32 id, Int32 game_id, String name, Windows.Foundation.Collections.IVector<Armor> bonuses, ArmorSetBonus bonus, ArmorSetBonus group_bonus);
+
+        Int32 Id{ get; };
+	    Int32 GameId{ get; };
+        String Name{ get; };
+		Windows.Foundation.Collections.IVector<Armor> Bonuses{ get; };
+		ArmorSetBonus Bonus{ get; };
+		ArmorSetBonus GroupBonus{ get; };
+	}
+
+	// Charms
+    runtimeclass CraftingCost
+    {
+        CraftingCost(Int32 quantity, Item item);
+
+        Int32 Quantity{ get; };
+        Item Item{ get; };
+	}
+
+    runtimeclass CharmRankCrafting
+    {
+        CharmRankCrafting(Boolean craftable, Int32 zenny_cost, Windows.Foundation.Collections.IVector<CraftingCost> materials);
+
+        Boolean Craftable{ get; };
+        Int32 ZennyCost{ get; };
+        Windows.Foundation.Collections.IVector<CraftingCost> Materials{ get; };
+    }
+
+    runtimeclass CharmRank
+    {
+        CharmRank(Int32 id, String name, String description, Int32 level, Int32 rarity, Windows.Foundation.Collections.IVector<SkillRank> skills, CharmRankCrafting crafting);
+
+        Int32 Id{ get; };
+        String Name{ get; };
+        String Description{ get; };
+        Int32 Level{ get; };
+        Int32 Rarity{ get; };
+        Windows.Foundation.Collections.IVector<SkillRank> Skills{ get; };
+        CharmRankCrafting Crafting{ get; };
+    }
+
+    runtimeclass Charm
+    {
+        Charm(Int32 id, Int32 game_id, Windows.Foundation.Collections.IVector<CharmRank> ranks);
+
+        Int32 Id{ get; };
+        Int32 GameId{ get; };
+        Windows.Foundation.Collections.IVector<CharmRank> Ranks{ get; };
+    }
+
+	// Decorations
+    enum DecorationKind
+    {
+        Weapon,
+        Armor
+    };
+
+    runtimeclass DecorationIcon
+    {
+        DecorationIcon(Color color, Int32 color_id);
+
+        Color Color{ get; };
+        Int32 ColorId{ get; };
+    }
+
+    runtimeclass Decoration
+    {
+        Decoration(
+            Int32 id,
+            Int32 game_id,
+            String name,
+            String description,
+            Int32 slot,
+            Int32 rarity,
+            DecorationKind kind,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            DecorationIcon icon
+        );
+
+        Int32 Id{ get; };
+        Int32 GameId{ get; };
+        String Name{ get; };
+        String Description{ get; };
+        Int32 Slot{ get; };
+        Int32 Rarity{ get; };
+        DecorationKind Kind{ get; };
+        Windows.Foundation.Collections.IVector<SkillRank> Skills{ get; };
+        DecorationIcon Icon{ get; };
+    }
+
+    // Weapons
+    runtimeclass Sharpness
+    {
+        Sharpness(Int32 red, Int32 orange, Int32 yellow, Int32 green, Int32 blue, Int32 white, Int32 purple);
+
+        Int32 Red{ get; };
+        Int32 Orange{ get; };
+        Int32 Yellow{ get; };
+        Int32 Green{ get; };
+        Int32 Blue{ get; };
+        Int32 White{ get; };
+        Int32 Purple{ get; };
+    }
+
+    enum Status
+    {
+        Poison,
+        Sleep,
+        Paralysis,
+        Stun,
+        Blastblight
+    };
+
+    enum Element
+    {
+        Fire,
+        Water,
+        Ice,
+        Thunder,
+        Dragon
+	};
+
+    enum SpecialKind
+    {
+        Element,
+        Status
+    };
+
+    runtimeclass WeaponDamage
+    {
+        WeaponDamage(Int32 raw, Int32 display);
+
+		Int32 Raw{ get; };
+	    Int32 Display{ get; };
+    }
+
+    interface WeaponSpecial
+    {
+		Int32 Id{ get; };
+	    WeaponDamage Damage{ get; };
+		Boolean Hidden{ get; };
+        SpecialKind SpecialKind{ get; };
+    }
+
+    runtimeclass WeaponElement : WeaponSpecial
+    {
+        WeaponElement(Int32 id, WeaponDamage damage, Boolean hidden, Element element);
+
+		Element Element{ get; };
+    }
+
+    runtimeclass WeaponStatus : WeaponSpecial
+    {
+        WeaponStatus(Int32 id, WeaponDamage damage, Boolean hidden, Status status);
+
+		Status Status{ get; };
+    }
+
+    runtimeclass WeaponSeries
+    {
+		WeaponSeries(Int32 id, Int32 game_id);
+
+		Int32 Id{ get; };
+        Int32 GameId{ get; };
+    }
+
+    enum WeaponKind
+    {
+        Bow,
+        HuntingHorn,
+        ChargeBlade,
+		InsectGlaive,
+		DualBlades,
+        Lance,
+		GrateSword,
+		LightBowgun,
+		Gunlance,
+		LongSword,
+		Hammer,
+        SwitchAxe,
+        HeavyBowgun,
+        SwordShield
+	};
+
+    enum Elderseal
+    {
+        Low,
+        Average,
+        High
+	};
+
+    runtimeclass WeaponCrafting
+    {
+        WeaponCrafting(
+            Int32 id,
+            Boolean craftable,
+            Weapon previous,
+            Windows.Foundation.Collections.IVector<Weapon> branches,
+            Int32 crafting_zenny_cost,
+            Windows.Foundation.Collections.IVector<CraftingCost> crafting_materials,
+            Int32 upgrade_zenny_cost,
+            Windows.Foundation.Collections.IVector<CraftingCost> upgrade_materials,
+            Int32 row,
+            Int32 column);
+
+        Int32 Id{ get; };
+        Boolean Craftable{ get; };
+        Weapon Previous{ get; };
+        Windows.Foundation.Collections.IVector<Weapon> Branches{ get; };
+        Int32 CraftingZennyCost{ get; };
+        Windows.Foundation.Collections.IVector<CraftingCost> CraftingMaterials{ get; };
+        Int32 UpgradeZennyCost{ get; };
+        Windows.Foundation.Collections.IVector<CraftingCost> UpgradeMaterials{ get; };
+        Int32 Row{ get; };
+        Int32 Column{ get; };
+    }
+
+    interface Weapon
+    {
+		Int32 Id{ get; };
+        Int32 GameId{ get; };
+		WeaponKind Kind{ get; };
+        String Name{ get; };
+        Int32 Rarity{ get; };
+        WeaponDamage Damage{ get; };
+        Windows.Foundation.Collections.IVector<WeaponSpecial> Specials{ get; };
+        Sharpness Sharpness{ get; };
+		Windows.Foundation.Collections.IVector<Int32> Handicraft{ get; };
+        Windows.Foundation.Collections.IVector<SkillRank> Skills{ get; };
+		Int32 DefenseBonus{ get; };
+		Elderseal Elderseal{ get; };
+		Int32 Affinity{ get; };
+        Windows.Foundation.Collections.IVector<Int32> Slots{ get; };
+		WeaponCrafting Crafting{ get; };
+		WeaponSeries Series{ get; };
+    }
+
+    enum BowCoating
+    {
+        CloseRange,
+        Power,
+        Pierce,
+        Paraysis,
+        Poison,
+        Sleep,
+        Blast,
+        Exhaust
+	};
+
+    runtimeclass Bow : Weapon
+    {
+        Bow(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+			Windows.Foundation.Collections.IVector<BowCoating> coatings
+        );
+
+		Windows.Foundation.Collections.IVector<BowCoating> Coatings{ get; };
+    }
+
+    enum HuntingHornNote
+    {
+        Purple,
+        Red,
+		Orange,
+        Yellow,
+        Green,
+        Blue,
+        Aqua,
+        White
+    };
+
+    runtimeclass HuntingHornSong
+    {
+		HuntingHornSong(Int32 id, Int32 effect_id, Windows.Foundation.Collections.IVector<HuntingHornNote> sequence, String name);
+
+        Int32 Id{ get; };
+        Int32 EffectId{ get; };
+        Windows.Foundation.Collections.IVector<HuntingHornNote> Sequence{ get; };
+        String Name{ get; };
+    }
+
+    runtimeclass HuntingHornMelody
+    {
+		HuntingHornMelody(Int32 id, Int32 game_id, Windows.Foundation.Collections.IVector<HuntingHornNote> notes, Windows.Foundation.Collections.IVector<HuntingHornSong> songs);
+
+		Int32 Id{ get; };
+	    Int32 GameId{ get; };
+		Windows.Foundation.Collections.IVector<HuntingHornNote> Notes{ get; };
+        Windows.Foundation.Collections.IVector<HuntingHornSong> Songs{ get; };
+    }
+
+    enum HuntingHornBubbleKind
+    {
+        Evasion,
+        Damage,
+        Regen,
+        Defense,
+        Stamina,
+        Immunity
+    };
+
+    runtimeclass HuntingHornBubble
+    {
+        HuntingHornBubble(Int32 id, Int32 game_id, HuntingHornBubbleKind kind, String name);
+
+		Int32 Id{ get; };
+        Int32 GameId{ get; };
+        HuntingHornBubbleKind Kind{ get; };
+		String Name{ get; };
+    }
+
+    enum HuntingHornWaveKind
+    {
+        Blunt,
+        Slash,
+        Fire,
+        Water,
+        Thunder,
+        Ice,
+        Dragon,
+        Poison,
+        Paralyze,
+        Sleep,
+        Blast
+    };
+
+    runtimeclass HuntingHornWave
+    {
+        HuntingHornWave(Int32 id, Int32 game_id, HuntingHornWaveKind kind, String name);
+
+		Int32 Id{ get; };
+        Int32 GameId{ get; };
+		HuntingHornWaveKind Kind{ get; };
+        String Name{ get; };
+    }
+
+    runtimeclass HuntingHorn : Weapon
+    {
+        HuntingHorn(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+			Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+			Windows.Foundation.Collections.IVector<Int32> handicraft,
+			Windows.Foundation.Collections.IVector<SkillRank> skills,
+			Int32 defense_bonus,
+            Elderseal elderseal,
+			Int32 affinity,
+			Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+			WeaponSeries series,
+			HuntingHornMelody melody,
+			HuntingHornBubble echo_bubble,
+            HuntingHornWave echo_wave
+		);
+
+        HuntingHornMelody Melody{ get; };
+        HuntingHornBubble EchoBubble{ get; };
+		HuntingHornWave EchoWave{ get; };
+    }
+
+    enum ChargeBladePhial
+    {
+        Element,
+        Impact
+	};
+
+    runtimeclass ChargeBlade : Weapon
+    {
+        ChargeBlade(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+            ChargeBladePhial phial
+        );
+
+        ChargeBladePhial Phial{ get; };
+    }
+
+    runtimeclass InsectGlaive : Weapon
+    {
+        InsectGlaive(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+			WeaponCrafting crafting,
+            WeaponSeries series,
+            Int32 kinsect_level
+        );
+
+		Int32 KinsectLevel{ get; };
+    }
+
+    enum AmmoKind
+    {
+        Normal,
+        Pierce,
+        Spread,
+        Slicing,
+        Sticky,
+		Cluster,
+        Wyvern,
+		Poison,
+		Paralysis,
+        Sleep,
+        Flaming,
+        Water,
+        Freeze,
+		Thunder,
+        Dragon,
+        Recover,
+        Demon,
+        Armor,
+        Exhaust,
+        Tranq
+    };
+
+    runtimeclass LightBowgunAmmo
+    {
+		LightBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity, Boolean rapid);
+
+        AmmoKind Kind{ get; };
+        Int32 Level{ get; };
+		Int32 Capacity{ get; };
+        Boolean Rapid{ get; };
+    }
+
+    enum LightBowgunSpecialAmmo
+    {
+        Wyvernblast,
+        Adhesive
+    };
+
+    runtimeclass LightBowgun : Weapon
+    {
+        LightBowgun(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+			Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+            Windows.Foundation.Collections.IVector<LightBowgunAmmo> ammo,
+            LightBowgunSpecialAmmo special_ammo
+        );
+
+		Windows.Foundation.Collections.IVector<LightBowgunAmmo> Ammo{ get; };
+        LightBowgunSpecialAmmo SpecialAmmo{ get; };
+	}
+
+    enum GunlanceShell
+    {
+        Normal,
+        Wide,
+        Long
+    };
+
+    runtimeclass Gunlance : Weapon
+    {
+        Gunlance(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+            GunlanceShell shell,
+            Int32 shell_level
+        );
+
+        GunlanceShell Shell{ get; };
+        Int32 ShellLevel{ get; };
+    }
+
+    enum SwitchAxePhial
+    {
+        Power,
+        Element,
+        Dragon,
+        Exhaust,
+        Parayze,
+        Poison
+    };
+
+    runtimeclass Phial
+    {
+        Phial(SwitchAxePhial kind, WeaponDamage damage);
+
+        SwitchAxePhial Kind{ get; };
+	    WeaponDamage Damage{ get; };
+    }
+
+    runtimeclass SwitchAxe : Weapon
+    {
+        SwitchAxe(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+            SwitchAxePhial phial
+		);
+
+        SwitchAxePhial Phial{ get; };
+	}
+
+    runtimeclass HeavyBowgunAmmo
+    {
+        HeavyBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity);
+
+        AmmoKind Kind{ get; };
+        Int32 Level{ get; };
+        Int32 Capacity{ get; };
+	}
+
+    runtimeclass HeavyBowgun : Weapon
+    {
+        HeavyBowgun(
+            Int32 id,
+            Int32 game_id,
+            WeaponKind kind,
+            String name,
+            Int32 rarity,
+            WeaponDamage damage,
+            Windows.Foundation.Collections.IVector<WeaponSpecial> specials,
+            Sharpness sharpness,
+            Windows.Foundation.Collections.IVector<Int32> handicraft,
+            Windows.Foundation.Collections.IVector<SkillRank> skills,
+            Int32 defense_bonus,
+            Elderseal elderseal,
+            Int32 affinity,
+            Windows.Foundation.Collections.IVector<Int32> slots,
+            WeaponCrafting crafting,
+            WeaponSeries series,
+            HeavyBowgunAmmo ammo
+        );
+
+        HeavyBowgunAmmo Ammo{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Database
+    {
+        static Windows.Foundation.IAsyncOperation<String> GetVersionAsync();
+	    static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetJsonArrayAsync(String url);
+	    static Windows.Foundation.IAsyncAction SaveUrlToFile(String url, String file_name);
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsAsync();
+
+        static SkillRank TestSkillRank();
+
+        Database();
+    }
+}

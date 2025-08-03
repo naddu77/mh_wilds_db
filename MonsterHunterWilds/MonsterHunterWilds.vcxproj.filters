@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>accd3aa8-1ba0-4223-9bbe-0c431709210b</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{926ab91d-31b4-48c3-b9a4-e681349f27f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Database.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SkillIcon.cpp" />
+    <ClCompile Include="SkillRank.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemIcon.cpp" />
+    <ClCompile Include="ItemRecipe.cpp" />
+    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="ArmorCrafting.cpp" />
+    <ClCompile Include="ArmorDefense.cpp" />
+    <ClCompile Include="ArmorResistances.cpp" />
+    <ClCompile Include="ArmorSet.cpp" />
+    <ClCompile Include="ArmorSetBonus.cpp" />
+    <ClCompile Include="ArmorSetBonusRank.cpp" />
+    <ClCompile Include="Charm.cpp" />
+    <ClCompile Include="CharmRank.cpp" />
+    <ClCompile Include="CharmRankCrafting.cpp" />
+    <ClCompile Include="CraftingCost.cpp" />
+    <ClCompile Include="Decoration.cpp" />
+    <ClCompile Include="DecorationIcon.cpp" />
+    <ClCompile Include="Bow.cpp" />
+    <ClCompile Include="ChargeBlade.cpp" />
+    <ClCompile Include="Gunlance.cpp" />
+    <ClCompile Include="HeavyBowgun.cpp" />
+    <ClCompile Include="HeavyBowgunAmmo.cpp" />
+    <ClCompile Include="HuntingHorn.cpp" />
+    <ClCompile Include="HuntingHornBubble.cpp" />
+    <ClCompile Include="HuntingHornMelody.cpp" />
+    <ClCompile Include="HuntingHornSong.cpp" />
+    <ClCompile Include="HuntingHornWave.cpp" />
+    <ClCompile Include="InsectGlaive.cpp" />
+    <ClCompile Include="LightBowgun.cpp" />
+    <ClCompile Include="LightBowgunAmmo.cpp" />
+    <ClCompile Include="Phial.cpp" />
+    <ClCompile Include="Sharpness.cpp" />
+    <ClCompile Include="SwitchAxe.cpp" />
+    <ClCompile Include="WeaponCrafting.cpp" />
+    <ClCompile Include="WeaponDamage.cpp" />
+    <ClCompile Include="WeaponElement.cpp" />
+    <ClCompile Include="WeaponSeries.cpp" />
+    <ClCompile Include="WeaponStatus.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SkillIcon.h" />
+    <ClInclude Include="SkillRank.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemIcon.h" />
+    <ClInclude Include="ItemRecipe.h" />
+    <ClInclude Include="Skill.h" />
+    <ClInclude Include="ArmorSetBonusRank.h" />
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="ArmorCrafting.h" />
+    <ClInclude Include="ArmorDefense.h" />
+    <ClInclude Include="ArmorResistances.h" />
+    <ClInclude Include="ArmorSet.h" />
+    <ClInclude Include="ArmorSetBonus.h" />
+    <ClInclude Include="Charm.h" />
+    <ClInclude Include="CharmRank.h" />
+    <ClInclude Include="CharmRankCrafting.h" />
+    <ClInclude Include="CraftingCost.h" />
+    <ClInclude Include="Decoration.h" />
+    <ClInclude Include="DecorationIcon.h" />
+    <ClInclude Include="Bow.h" />
+    <ClInclude Include="ChargeBlade.h" />
+    <ClInclude Include="Gunlance.h" />
+    <ClInclude Include="HeavyBowgun.h" />
+    <ClInclude Include="HeavyBowgunAmmo.h" />
+    <ClInclude Include="HuntingHorn.h" />
+    <ClInclude Include="HuntingHornBubble.h" />
+    <ClInclude Include="HuntingHornMelody.h" />
+    <ClInclude Include="HuntingHornSong.h" />
+    <ClInclude Include="HuntingHornWave.h" />
+    <ClInclude Include="InsectGlaive.h" />
+    <ClInclude Include="LightBowgun.h" />
+    <ClInclude Include="LightBowgunAmmo.h" />
+    <ClInclude Include="Phial.h" />
+    <ClInclude Include="Sharpness.h" />
+    <ClInclude Include="SwitchAxe.h" />
+    <ClInclude Include="WeaponCrafting.h" />
+    <ClInclude Include="WeaponDamage.h" />
+    <ClInclude Include="WeaponElement.h" />
+    <ClInclude Include="WeaponSeries.h" />
+    <ClInclude Include="WeaponStatus.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Class.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonsterHunterWilds.def" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+</Project>

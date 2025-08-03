@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.props')" />
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.props" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.props')" />
+  <PropertyGroup Label="Globals">
+    <CppWinRTOptimized>true</CppWinRTOptimized>
+    <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>{b92d784e-3ee9-48c3-a14c-9c80db97e5d8}</ProjectGuid>
+    <ProjectName>MonsterHunterWilds</ProjectName>
+    <RootNamespace>MonsterHunterWilds</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>false</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <DesktopCompatible>true</DesktopCompatible>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <GenerateManifest>false</GenerateManifest>
+    <DesktopCompatible>true</DesktopCompatible>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+      <ModuleDefinitionFile>MonsterHunterWilds.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">true</BuildStlModules>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BuildStlModules>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildStlModules>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</BuildStlModules>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BuildStlModules>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdcpplatest</LanguageStandard>
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildStlModules>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="ArmorCrafting.h" />
+    <ClInclude Include="ArmorDefense.h" />
+    <ClInclude Include="ArmorResistances.h" />
+    <ClInclude Include="ArmorSet.h" />
+    <ClInclude Include="ArmorSetBonus.h" />
+    <ClInclude Include="ArmorSetBonusRank.h" />
+    <ClInclude Include="Bow.h" />
+    <ClInclude Include="ChargeBlade.h" />
+    <ClInclude Include="Charm.h" />
+    <ClInclude Include="CharmRank.h" />
+    <ClInclude Include="CharmRankCrafting.h" />
+    <ClInclude Include="CraftingCost.h" />
+    <ClInclude Include="Decoration.h" />
+    <ClInclude Include="DecorationIcon.h" />
+    <ClInclude Include="Gunlance.h" />
+    <ClInclude Include="HeavyBowgun.h" />
+    <ClInclude Include="HeavyBowgunAmmo.h" />
+    <ClInclude Include="HuntingHorn.h" />
+    <ClInclude Include="HuntingHornBubble.h" />
+    <ClInclude Include="HuntingHornMelody.h" />
+    <ClInclude Include="HuntingHornSong.h" />
+    <ClInclude Include="HuntingHornWave.h" />
+    <ClInclude Include="InsectGlaive.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemIcon.h" />
+    <ClInclude Include="ItemRecipe.h" />
+    <ClInclude Include="LightBowgun.h" />
+    <ClInclude Include="LightBowgunAmmo.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Database.h">
+      <DependentUpon>Database.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Phial.h" />
+    <ClInclude Include="Sharpness.h" />
+    <ClInclude Include="Skill.h" />
+    <ClInclude Include="SkillIcon.h" />
+    <ClInclude Include="SkillRank.h" />
+    <ClInclude Include="SwitchAxe.h" />
+    <ClInclude Include="WeaponCrafting.h" />
+    <ClInclude Include="WeaponDamage.h" />
+    <ClInclude Include="WeaponElement.h" />
+    <ClInclude Include="WeaponSeries.h" />
+    <ClInclude Include="WeaponStatus.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="ArmorCrafting.cpp" />
+    <ClCompile Include="ArmorDefense.cpp" />
+    <ClCompile Include="ArmorResistances.cpp" />
+    <ClCompile Include="ArmorSet.cpp" />
+    <ClCompile Include="ArmorSetBonus.cpp" />
+    <ClCompile Include="ArmorSetBonusRank.cpp" />
+    <ClCompile Include="Bow.cpp" />
+    <ClCompile Include="ChargeBlade.cpp" />
+    <ClCompile Include="Charm.cpp" />
+    <ClCompile Include="CharmRank.cpp" />
+    <ClCompile Include="CharmRankCrafting.cpp" />
+    <ClCompile Include="CraftingCost.cpp" />
+    <ClCompile Include="Decoration.cpp" />
+    <ClCompile Include="DecorationIcon.cpp" />
+    <ClCompile Include="Gunlance.cpp" />
+    <ClCompile Include="HeavyBowgun.cpp" />
+    <ClCompile Include="HeavyBowgunAmmo.cpp" />
+    <ClCompile Include="HuntingHorn.cpp" />
+    <ClCompile Include="HuntingHornBubble.cpp" />
+    <ClCompile Include="HuntingHornMelody.cpp" />
+    <ClCompile Include="HuntingHornSong.cpp" />
+    <ClCompile Include="HuntingHornWave.cpp" />
+    <ClCompile Include="InsectGlaive.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemIcon.cpp" />
+    <ClCompile Include="ItemRecipe.cpp" />
+    <ClCompile Include="LightBowgun.cpp" />
+    <ClCompile Include="LightBowgunAmmo.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Database.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="Phial.cpp" />
+    <ClCompile Include="Sharpness.cpp" />
+    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SkillIcon.cpp" />
+    <ClCompile Include="SkillRank.cpp" />
+    <ClCompile Include="SwitchAxe.cpp" />
+    <ClCompile Include="WeaponCrafting.cpp" />
+    <ClCompile Include="WeaponDamage.cpp" />
+    <ClCompile Include="WeaponElement.cpp" />
+    <ClCompile Include="WeaponSeries.cpp" />
+    <ClCompile Include="WeaponStatus.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Database.idl">
+      <SubType>Code</SubType>
+      <DependentUpon>Database.cpp</DependentUpon>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonsterHunterWilds.def" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt">
+      <DeploymentContent>false</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2903.40\build\native\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2903.40\build\native\Microsoft.Web.WebView2.targets')" />
+    <Import Project="..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.targets" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.targets" Condition="Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.ImplementationLibrary.1.0.250325.1\build\native\Microsoft.Windows.ImplementationLibrary.targets" Condition="Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.250325.1\build\native\Microsoft.Windows.ImplementationLibrary.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2903.40\build\native\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2903.40\build\native\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.WindowsAppSDK.1.7.250606001\build\native\Microsoft.WindowsAppSDK.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.250303.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.BuildTools.10.0.26100.4654\build\Microsoft.Windows.SDK.BuildTools.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.250325.1\build\native\Microsoft.Windows.ImplementationLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.ImplementationLibrary.1.0.250325.1\build\native\Microsoft.Windows.ImplementationLibrary.targets'))" />
+  </Target>
+</Project>
