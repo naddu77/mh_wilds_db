@@ -854,15 +854,6 @@ namespace MonsterHunterWilds
         SwitchAxePhial Phial{ get; };
 	}
 
-    runtimeclass HeavyBowgunAmmo
-    {
-        HeavyBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity);
-
-        AmmoKind Kind{ get; };
-        Int32 Level{ get; };
-        Int32 Capacity{ get; };
-	}
-
     runtimeclass HeavyBowgun : Weapon
     {
         HeavyBowgun(

@@ -83,14 +83,4 @@ namespace winrt::MonsterHunterWilds::implementation
 
         co_return winrt::single_threaded_vector<winrt::MonsterHunterWilds::Skill>(std::move(skills));
     }
-
-    SkillRank Database::TestSkillRank()
-    {
-        return SkillRank{
-            18,
-            {},
-            L"",
-            13
-		};
-    }
 }

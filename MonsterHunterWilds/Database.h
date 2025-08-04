@@ -17,8 +17,6 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetCharmsAsync();
         static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetDecorationsAsync();
         static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> ParseSkillsAsync();
-
-        static SkillRank TestSkillRank();
     };    
 }
 
