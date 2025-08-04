@@ -11,12 +11,12 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::Windows::Foundation::IAsyncOperation<winrt::hstring> GetVersionAsync();
         static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetJsonArrayAsync(winrt::hstring url);
         static winrt::Windows::Foundation::IAsyncAction SaveUrlToFile(winrt::hstring url, winrt::hstring file_name);
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetWeaponsAsync();
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetArmorsAsync();
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetSkillsAsync();
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetCharmsAsync();
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetDecorationsAsync();
-        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> ParseSkillsAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetWeaponsJsonAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetArmorsJsonAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetSkillsJsonAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetCharmsJsonAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetDecorationsJsonAsync();
+        static winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> GetSkillsAsync();
     };    
 }
 

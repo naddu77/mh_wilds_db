@@ -51,34 +51,34 @@ namespace winrt::MonsterHunterWilds::implementation
         co_await winrt::Windows::Storage::FileIO::WriteTextAsync(storage_file, skills_json);
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetWeaponsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetWeaponsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/weapons");
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetArmorsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetArmorsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/armor");
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/skills");
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetCharmsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetCharmsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/charms");
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetDecorationsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetDecorationsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/decorations");
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::ParseSkillsAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()
     {
-        auto skills_json_object{ co_await GetSkillsAsync() };
+        auto skills_json_object{ co_await GetSkillsJsonAsync() };
         auto skills{ ParseJsonArray(skills_json_object, [](auto const& json) { return Skill::Parse(json.GetObject()); }) };
 
         co_return winrt::single_threaded_vector<winrt::MonsterHunterWilds::Skill>(std::move(skills));

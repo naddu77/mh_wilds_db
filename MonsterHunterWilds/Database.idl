@@ -854,6 +854,15 @@ namespace MonsterHunterWilds
         SwitchAxePhial Phial{ get; };
 	}
 
+    runtimeclass HeavyBowgunAmmo
+    {
+        HeavyBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity);
+
+        AmmoKind Kind{ get; };
+        Int32 Level{ get; };
+        Int32 Capacity{ get; };
+    }
+
     runtimeclass HeavyBowgun : Weapon
     {
         HeavyBowgun(
@@ -885,15 +894,13 @@ namespace MonsterHunterWilds
         static Windows.Foundation.IAsyncOperation<String> GetVersionAsync();
 	    static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetJsonArrayAsync(String url);
 	    static Windows.Foundation.IAsyncAction SaveUrlToFile(String url, String file_name);
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsJsonAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsJsonAsync();
+        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsJsonAsync();
 
-        static Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > ParseSkillsAsync();
-
-        static SkillRank TestSkillRank();
+        static Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > GetSkillsAsync();
 
         Database();
     }

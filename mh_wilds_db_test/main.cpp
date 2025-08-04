@@ -5,7 +5,7 @@ import std;
 
 winrt::Windows::Foundation::IAsyncAction TestSkills()
 {
-    auto skills{ co_await winrt::MonsterHunterWilds::Database::ParseSkillsAsync() };
+    auto skills{ co_await winrt::MonsterHunterWilds::Database::GetSkillsAsync() };
 
     for (auto const& skill : skills)
     {
