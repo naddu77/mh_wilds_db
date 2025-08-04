@@ -888,20 +888,40 @@ namespace MonsterHunterWilds
         HeavyBowgunAmmo Ammo{ get; };
     }
 
+    // Database Urls
+    [default_interface]
+    runtimeclass Api
+    {
+        Api();
+        Api(String locale);
+
+        String BaseUrl{ get; };
+        String Locale;
+
+        String ArmorUrl();
+        String ArmorSetsUrl();
+        String CharmsUrl();
+        String DecorationsUrl();
+        String ItemsUrl();
+        String SkillsUrl();
+        String WeaponsUrl();
+    }
+
     [default_interface]
     runtimeclass Database
     {
-        static Windows.Foundation.IAsyncOperation<String> GetVersionAsync();
-	    static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetJsonArrayAsync(String url);
-	    static Windows.Foundation.IAsyncAction SaveUrlToFile(String url, String file_name);
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsJsonAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsJsonAsync();
-        static Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsJsonAsync();
-
-        static Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > GetSkillsAsync();
-
         Database();
+        Database(String locale);
+
+        Windows.Foundation.IAsyncOperation<String> GetVersionAsync();
+	    Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetJsonArrayAsync(String url);
+	    Windows.Foundation.IAsyncAction SaveUrlToFile(String url, String file_name);
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsJsonAsync();
+
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > GetSkillsAsync();
     }
 }

@@ -28,6 +28,12 @@ namespace winrt::MonsterHunterWilds::implementation
         co_return version;
     }
 
+    Database::Database(winrt::hstring const& locale)
+        : api{ locale }
+    {
+
+    }
+
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetJsonArrayAsync(winrt::hstring url)
     {
         winrt::Windows::Web::Http::HttpClient http_client;
@@ -53,27 +59,27 @@ namespace winrt::MonsterHunterWilds::implementation
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetWeaponsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/weapons");
+        co_return co_await GetJsonArrayAsync(api.WeaponsUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetArmorsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/armor");
+        co_return co_await GetJsonArrayAsync(api.ArmorUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/skills");
+        co_return co_await GetJsonArrayAsync(api.SkillsUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetCharmsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/charms");
+        co_return co_await GetJsonArrayAsync(api.CharmsUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetDecorationsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(L"https://wilds.mhdb.io/ko/decorations");
+        co_return co_await GetJsonArrayAsync(api.DecorationsUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()

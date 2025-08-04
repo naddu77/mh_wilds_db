@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Api.h" />
     <ClInclude Include="Armor.h" />
     <ClInclude Include="ArmorCrafting.h" />
     <ClInclude Include="ArmorDefense.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="WeaponStatus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Api.cpp" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="ArmorCrafting.cpp" />
     <ClCompile Include="ArmorDefense.cpp" />

@@ -54,6 +54,7 @@
     <ClCompile Include="WeaponSeries.cpp" />
     <ClCompile Include="WeaponStatus.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Api.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -98,9 +99,7 @@
     <ClInclude Include="WeaponSeries.h" />
     <ClInclude Include="WeaponStatus.h" />
     <ClInclude Include="Util.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="Class.idl" />
+    <ClInclude Include="Api.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonsterHunterWilds.def" />
@@ -108,5 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
+    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natstepfilter" />
   </ItemGroup>
 </Project>
