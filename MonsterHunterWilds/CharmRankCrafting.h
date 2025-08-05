@@ -5,9 +5,10 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct CharmRankCrafting : CharmRankCraftingT<CharmRankCrafting>
     {
-        CharmRankCrafting() = default;
+        static winrt::MonsterHunterWilds::CharmRankCrafting Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
 
         CharmRankCrafting(bool craftable, int32_t zenny_cost, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CraftingCost> const& materials);
+
         bool Craftable();
         int32_t ZennyCost();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CraftingCost> Materials();

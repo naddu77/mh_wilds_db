@@ -4,6 +4,14 @@
 
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::Phial Phial::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            winrt::MonsterHunterWilds::EnumMap::SwitchAxePhialMap(json_object.GetNamedString(L"kind")),
+            winrt::MonsterHunterWilds::WeaponDamage::Parse(json_object.GetNamedObject(L"damage"))
+        };
+    }
+
     Phial::Phial(winrt::MonsterHunterWilds::SwitchAxePhial const& kind, winrt::MonsterHunterWilds::WeaponDamage const& damage)
         : kind_{ kind }
         , damage_{ damage }

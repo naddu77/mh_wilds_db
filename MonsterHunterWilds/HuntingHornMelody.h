@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct HuntingHornMelody : HuntingHornMelodyT<HuntingHornMelody>
     {
+        static winrt::MonsterHunterWilds::HuntingHornMelody Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         HuntingHornMelody(int32_t id, int32_t game_id, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::HuntingHornNote> const& notes, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::HuntingHornSong> const& songs);
         
         int32_t Id();

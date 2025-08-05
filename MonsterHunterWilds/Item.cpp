@@ -4,6 +4,21 @@
 
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::Item Item::Parse(winrt::Windows::Data::Json::JsonObject const& json)
+    {
+        return {
+            static_cast<int32_t>(json.GetNamedNumber(L"id")),
+            static_cast<int32_t>(json.GetNamedNumber(L"gameId")),
+            json.GetNamedString(L"name"),
+            json.GetNamedString(L"description"),
+            static_cast<int32_t>(json.GetNamedNumber(L"rarity")),
+            static_cast<int32_t>(json.GetNamedNumber(L"carryLimit")),
+            static_cast<int32_t>(json.GetNamedNumber(L"value")),
+            {},            // recipes »ý·«
+            winrt::MonsterHunterWilds::ItemIcon::Parse(json.GetNamedObject(L"icon"))
+        };
+    }
+
     Item::Item(
         int32_t id,
         int32_t game_id,

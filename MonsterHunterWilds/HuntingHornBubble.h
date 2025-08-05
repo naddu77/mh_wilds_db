@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct HuntingHornBubble : HuntingHornBubbleT<HuntingHornBubble>
     {
+        static winrt::MonsterHunterWilds::HuntingHornBubble Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         HuntingHornBubble(int32_t id, int32_t game_id, winrt::MonsterHunterWilds::HuntingHornBubbleKind const& kind, hstring const& name);
 
         int32_t Id();

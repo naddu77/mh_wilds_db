@@ -1,0 +1,33 @@
+#pragma once
+#include "EnumMap.g.h"
+
+namespace winrt::MonsterHunterWilds::implementation
+{
+    struct EnumMap
+    {
+        static winrt::MonsterHunterWilds::Color ColorMap(hstring const& str);
+        static winrt::MonsterHunterWilds::ItemIconKind ItemIconKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::SkillKind SkillKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::SkillIconKind SkillIconKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::Element ElementMap(hstring const& str);
+        static winrt::MonsterHunterWilds::Status StatusMap(hstring const& str);
+        static winrt::MonsterHunterWilds::ArmorKind ArmorKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::Rank RankMap(hstring const& str);
+        static winrt::MonsterHunterWilds::DecorationKind DecorationKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::Elderseal EldersealMap(hstring const& str);
+        static winrt::MonsterHunterWilds::WeaponKind WeaponKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::ChargeBladePhial ChargeBladePhialMap(hstring const& str);
+        static winrt::MonsterHunterWilds::SwitchAxePhial SwitchAxePhialMap(hstring const& str);
+        static winrt::MonsterHunterWilds::HuntingHornNote HuntingHornNoteMap(hstring const& str);
+        static winrt::MonsterHunterWilds::HuntingHornBubbleKind HuntingHornBubbleKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::AmmoKind AmmoKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::HuntingHornWaveKind HuntingHornWaveKindMap(hstring const& str);
+    };
+}
+
+namespace winrt::MonsterHunterWilds::factory_implementation
+{
+    struct EnumMap : EnumMapT<EnumMap, implementation::EnumMap>
+    {
+    };
+}

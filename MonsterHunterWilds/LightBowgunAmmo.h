@@ -5,7 +5,9 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct LightBowgunAmmo : LightBowgunAmmoT<LightBowgunAmmo>
     {
-        LightBowgunAmmo( winrt::MonsterHunterWilds::AmmoKind const& kind, int32_t level, int32_t capacity, bool rapid);
+        static winrt::MonsterHunterWilds::LightBowgunAmmo Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
+        LightBowgunAmmo(winrt::MonsterHunterWilds::AmmoKind const& kind, int32_t level, int32_t capacity, bool rapid);
 
         winrt::MonsterHunterWilds::AmmoKind Kind();
         int32_t Level();

@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct WeaponStatus : WeaponStatusT<WeaponStatus>
     {
+        static winrt::MonsterHunterWilds::WeaponStatus Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         WeaponStatus(int32_t id, winrt::MonsterHunterWilds::WeaponDamage const& damage, bool hidden, winrt::MonsterHunterWilds::Status const& status);
 
         winrt::MonsterHunterWilds::Status Status();

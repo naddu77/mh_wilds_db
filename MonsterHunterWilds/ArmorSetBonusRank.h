@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct ArmorSetBonusRank : ArmorSetBonusRankT<ArmorSetBonusRank>
     {
+        static winrt::MonsterHunterWilds::ArmorSetBonusRank Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         ArmorSetBonusRank(int32_t id, int32_t pieces, winrt::MonsterHunterWilds::SkillRank const& skill);
 
         int32_t Id();

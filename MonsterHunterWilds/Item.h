@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct Item : ItemT<Item>
     {
+        static winrt::MonsterHunterWilds::Item Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         Item(
             int32_t id,
             int32_t game_id,

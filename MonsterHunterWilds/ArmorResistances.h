@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct ArmorResistances : ArmorResistancesT<ArmorResistances>
     {
+        static winrt::MonsterHunterWilds::ArmorResistances Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         ArmorResistances(int32_t fire, int32_t water, int32_t ice, int32_t thunder, int32_t dragon);
 
         int32_t Fire();
@@ -21,6 +23,7 @@ namespace winrt::MonsterHunterWilds::implementation
 		int32_t dragon_;
     };
 }
+
 namespace winrt::MonsterHunterWilds::factory_implementation
 {
     struct ArmorResistances : ArmorResistancesT<ArmorResistances, implementation::ArmorResistances>

@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct Armor : ArmorT<Armor>
     {
+        static winrt::MonsterHunterWilds::Armor Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         Armor(
             int32_t id,
             hstring const& name,
@@ -16,7 +18,7 @@ namespace winrt::MonsterHunterWilds::implementation
             winrt::MonsterHunterWilds::ArmorResistances const& resistances,
             winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots,
             winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills,
-            winrt::MonsterHunterWilds::ArmorSet const& armor_set,
+            winrt::MonsterHunterWilds::MiniArmorSet const& armor_set,
             winrt::MonsterHunterWilds::ArmorCrafting const& crafting);
         
         int32_t Id();
@@ -29,7 +31,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::MonsterHunterWilds::ArmorResistances Resistances();
         winrt::Windows::Foundation::Collections::IVector<int32_t> Slots();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> Skills();
-        winrt::MonsterHunterWilds::ArmorSet ArmorSet();
+        winrt::MonsterHunterWilds::MiniArmorSet ArmorSet();
         winrt::MonsterHunterWilds::ArmorCrafting Crafting();
 
     private:
@@ -43,7 +45,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::MonsterHunterWilds::ArmorResistances resistances_;
         winrt::Windows::Foundation::Collections::IVector<int32_t> slots_;
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> skills_;
-        winrt::MonsterHunterWilds::ArmorSet armor_set_;
+        winrt::MonsterHunterWilds::MiniArmorSet armor_set_;
 		winrt::MonsterHunterWilds::ArmorCrafting crafting_;
     };
 }

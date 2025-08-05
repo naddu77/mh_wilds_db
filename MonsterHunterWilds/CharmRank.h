@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct CharmRank : CharmRankT<CharmRank>
     {
+        static winrt::MonsterHunterWilds::CharmRank Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         CharmRank(int32_t id, hstring const& name, hstring const& description, int32_t level, int32_t rarity, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, winrt::MonsterHunterWilds::CharmRankCrafting const& crafting);
         
         int32_t Id();

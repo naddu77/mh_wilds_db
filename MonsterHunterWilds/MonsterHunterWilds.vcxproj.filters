@@ -55,6 +55,15 @@
     <ClCompile Include="WeaponStatus.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Api.cpp" />
+    <ClCompile Include="MiniArmorSet.cpp" />
+    <ClCompile Include="MiniWeapon.cpp" />
+    <ClCompile Include="EnumMap.cpp" />
+    <ClCompile Include="SwordShield.cpp" />
+    <ClCompile Include="DualBlades.cpp" />
+    <ClCompile Include="GreatSword.cpp" />
+    <ClCompile Include="Hammer.cpp" />
+    <ClCompile Include="Lance.cpp" />
+    <ClCompile Include="LongSword.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -100,6 +109,15 @@
     <ClInclude Include="WeaponStatus.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Api.h" />
+    <ClInclude Include="MiniArmorSet.h" />
+    <ClInclude Include="MiniWeapon.h" />
+    <ClInclude Include="EnumMap.h" />
+    <ClInclude Include="SwordShield.h" />
+    <ClInclude Include="DualBlades.h" />
+    <ClInclude Include="GreatSword.h" />
+    <ClInclude Include="Hammer.h" />
+    <ClInclude Include="Lance.h" />
+    <ClInclude Include="LongSword.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonsterHunterWilds.def" />

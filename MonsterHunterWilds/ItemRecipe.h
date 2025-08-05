@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct ItemRecipe : ItemRecipeT<ItemRecipe>
     {
+        static winrt::MonsterHunterWilds::ItemRecipe Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         ItemRecipe(int32_t id, int32_t amount, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item> const& inputs);
 
         int32_t Id();

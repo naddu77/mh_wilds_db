@@ -21,6 +21,29 @@ winrt::Windows::Foundation::IAsyncAction TestSkills()
     }
 }
 
+winrt::Windows::Foundation::IAsyncAction TestCharms()
+{
+    winrt::MonsterHunterWilds::Database db;
+    auto charms{ co_await db.GetCharmsAsync() };
+
+    for (auto const& charm : charms)
+    {
+        std::wcout << std::format(L"Charm ID: {}, Game ID: {}\n", charm.Id(), charm.GameId());
+
+        for (auto const& rank : charm.Ranks())
+        {
+            std::wcout << std::format(L"  Rank ID: {}, Name: {}, Description: {}, Level: {}, Rarity: {}\n",
+                rank.Id(), rank.Name(), rank.Description(), rank.Level(), rank.Rarity());
+
+            for (auto const& skill : rank.Skills())
+            {
+                std::wcout << std::format(L"    Skill ID: {}, Level: {}, Name: {}, Description: {}\n",
+                    skill.Id(), skill.Level(), skill.Name(), skill.Description());
+            }
+        }
+    }
+}
+
 int main()
 {
 	std::wcout.imbue(std::locale{ "" });
@@ -29,8 +52,8 @@ int main()
 
 	//std::wcout << std::format(L"Database Version: {}\n", winrt::MonsterHunterWilds::Database::GetVersionAsync().get());
 
-    // Skills
-    TestSkills().get();
+    //TestSkills().get();
+    //TestCharms().get();
 
 
 	//__debugbreak();

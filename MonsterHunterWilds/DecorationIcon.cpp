@@ -2,8 +2,18 @@
 #include "DecorationIcon.h"
 #include "DecorationIcon.g.cpp"
 
+#include "Util.h"
+
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::DecorationIcon DecorationIcon::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            winrt::MonsterHunterWilds::EnumMap::ColorMap(json_object.GetNamedString(L"color")),
+            static_cast<int32_t>(json_object.GetNamedNumber(L"colorId"))
+        };
+    }
+
     DecorationIcon::DecorationIcon(winrt::MonsterHunterWilds::Color const& color, int32_t color_id)
         : color_{ color }, color_id_{ color_id }
     {

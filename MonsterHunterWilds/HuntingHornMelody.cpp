@@ -2,8 +2,20 @@
 #include "HuntingHornMelody.h"
 #include "HuntingHornMelody.g.cpp"
 
+#include "Util.h"
+
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::HuntingHornMelody HuntingHornMelody::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            static_cast<int32_t>(json_object.GetNamedNumber(L"gameId")),
+            ParseJsonArray(json_object.GetNamedArray(L"notes"), [](auto const& json_value) { return winrt::MonsterHunterWilds::EnumMap::HuntingHornNoteMap(json_value.GetString()); }),
+            ParseJsonArray(json_object.GetNamedArray(L"songs"), [](auto const& json_value) { return winrt::MonsterHunterWilds::HuntingHornSong::Parse(json_value.GetObject()); })
+        };
+    }
+
     HuntingHornMelody::HuntingHornMelody(
         int32_t id,
         int32_t game_id,

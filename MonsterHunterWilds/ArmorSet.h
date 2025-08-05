@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct ArmorSet : ArmorSetT<ArmorSet>
     {
+        static winrt::MonsterHunterWilds::ArmorSet Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         ArmorSet(int32_t id, int32_t game_id, hstring const& name, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor> const& bonuses, winrt::MonsterHunterWilds::ArmorSetBonus const& bonus, winrt::MonsterHunterWilds::ArmorSetBonus const& group_bonus);
         
         int32_t Id();

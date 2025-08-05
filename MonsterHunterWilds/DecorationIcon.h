@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct DecorationIcon : DecorationIconT<DecorationIcon>
     {
+        static winrt::MonsterHunterWilds::DecorationIcon Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         DecorationIcon(winrt::MonsterHunterWilds::Color const& color, int32_t color_id);
 
         winrt::MonsterHunterWilds::Color Color();

@@ -5,9 +5,10 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct Charm : CharmT<Charm>
     {
-        Charm() = default;
+        static winrt::MonsterHunterWilds::Charm Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
 
         Charm(int32_t id, int32_t game_id, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRank> const& ranks);
+
         int32_t Id();
         int32_t GameId();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRank> Ranks();

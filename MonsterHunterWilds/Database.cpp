@@ -82,11 +82,47 @@ namespace winrt::MonsterHunterWilds::implementation
         co_return co_await GetJsonArrayAsync(api.DecorationsUrl());
     }
 
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor>> Database::GetArmorsAsync()
+    {
+        throw hresult_not_implemented();
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSet>> Database::GetArmorSetsAsync()
+    {
+        throw hresult_not_implemented();
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Charm>> Database::GetCharmsAsync()
+    {
+        auto json_object{ co_await GetCharmsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Charm::Parse(json.GetObject()); }) };
+
+        co_return result;
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Decoration>> Database::GetDecorationsAsync()
+    {
+        auto json_object{ co_await GetDecorationsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Decoration::Parse(json.GetObject()); }) };
+
+        co_return result;
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item>> Database::GetItemsAsync()
+    {
+        throw hresult_not_implemented();
+    }
+
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()
     {
-        auto skills_json_object{ co_await GetSkillsJsonAsync() };
-        auto skills{ ParseJsonArray(skills_json_object, [](auto const& json) { return Skill::Parse(json.GetObject()); }) };
+        auto json_object{ co_await GetSkillsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json) { return Skill::Parse(json.GetObject()); }) };
 
-        co_return winrt::single_threaded_vector<winrt::MonsterHunterWilds::Skill>(std::move(skills));
+        co_return result;
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon>> Database::GetWeaponsAsync()
+    {
+        throw hresult_not_implemented();
     }
 }

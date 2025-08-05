@@ -2,8 +2,28 @@
 #include "Armor.h"
 #include "Armor.g.cpp"
 
+#include "Util.h"
+
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::Armor Armor::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            json_object.GetNamedString(L"name"),
+            json_object.GetNamedString(L"description"),
+            winrt::MonsterHunterWilds::EnumMap::ArmorKindMap(json_object.GetNamedString(L"kind")),
+            winrt::MonsterHunterWilds::EnumMap::RankMap(json_object.GetNamedString(L"rank")),
+            static_cast<int32_t>(json_object.GetNamedNumber(L"rarity")),
+            winrt::MonsterHunterWilds::ArmorDefense::Parse(json_object.GetNamedObject(L"defense")),
+            winrt::MonsterHunterWilds::ArmorResistances::Parse(json_object.GetNamedObject(L"resistances")),
+            ParseJsonArray(json_object.GetNamedArray(L"slots"), [](auto const& slot) { return static_cast<int32_t>(slot.GetNumber()); }),
+            ParseJsonArray(json_object.GetNamedArray(L"skills"), [](auto const& s) { return winrt::MonsterHunterWilds::SkillRank::Parse(s.GetObject()); }),
+            winrt::MonsterHunterWilds::MiniArmorSet::Parse(json_object.GetNamedObject(L"armorSet")),
+            winrt::MonsterHunterWilds::ArmorCrafting::Parse(json_object.GetNamedObject(L"crafting"))
+        };
+    }
+
     Armor::Armor(
         int32_t id,
         hstring const& name,
@@ -15,7 +35,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::MonsterHunterWilds::ArmorResistances const& resistances,
         winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots,
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills,
-        winrt::MonsterHunterWilds::ArmorSet const& armor_set,
+        winrt::MonsterHunterWilds::MiniArmorSet const& armor_set,
         winrt::MonsterHunterWilds::ArmorCrafting const& crafting)
         : id_{ id }
         , name_{ name }
@@ -83,7 +103,7 @@ namespace winrt::MonsterHunterWilds::implementation
         return skills_;
     }
 
-    winrt::MonsterHunterWilds::ArmorSet Armor::ArmorSet()
+    winrt::MonsterHunterWilds::MiniArmorSet Armor::ArmorSet()
     {
         return armor_set_;
     }

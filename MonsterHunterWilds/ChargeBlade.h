@@ -5,7 +5,26 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct ChargeBlade : ChargeBladeT<ChargeBlade>
     {
-        ChargeBlade(int32_t id, int32_t game_id, winrt::MonsterHunterWilds::WeaponKind const& kind, hstring const& name, int32_t rarity, winrt::MonsterHunterWilds::WeaponDamage const& damage, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> const& specials, winrt::MonsterHunterWilds::Sharpness const& sharpness, winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, int32_t defense_bonus, winrt::MonsterHunterWilds::Elderseal const& elderseal, int32_t affinity, winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots, winrt::MonsterHunterWilds::WeaponCrafting const& crafting, winrt::MonsterHunterWilds::WeaponSeries const& series, winrt::MonsterHunterWilds::ChargeBladePhial const& phial);
+        static winrt::MonsterHunterWilds::ChargeBlade Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
+        ChargeBlade(
+            int32_t id,
+            int32_t game_id,
+            winrt::MonsterHunterWilds::WeaponKind const& kind,
+            hstring const& name,
+            int32_t rarity,
+            winrt::MonsterHunterWilds::WeaponDamage const& damage,
+            winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> const& specials,
+            winrt::MonsterHunterWilds::Sharpness const& sharpness,
+            winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft,
+            winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills,
+            int32_t defense_bonus,
+            winrt::MonsterHunterWilds::Elderseal const& elderseal,
+            int32_t affinity,
+            winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots,
+            winrt::MonsterHunterWilds::WeaponCrafting const& crafting,
+            winrt::MonsterHunterWilds::WeaponSeries const& series,
+            winrt::MonsterHunterWilds::ChargeBladePhial const& phial);
         
         winrt::MonsterHunterWilds::ChargeBladePhial Phial();
         int32_t Id();

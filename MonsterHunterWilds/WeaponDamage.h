@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct WeaponDamage : WeaponDamageT<WeaponDamage>
     {
+        static winrt::MonsterHunterWilds::WeaponDamage Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         WeaponDamage(int32_t raw, int32_t display);
 
         int32_t Raw();

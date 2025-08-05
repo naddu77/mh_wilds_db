@@ -1,10 +1,13 @@
 #pragma once
 #include "CraftingCost.g.h"
+#include "Item.h"
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     struct CraftingCost : CraftingCostT<CraftingCost>
     {
+        static winrt::MonsterHunterWilds::CraftingCost Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         CraftingCost(int32_t quantity, winrt::MonsterHunterWilds::Item const& item);
 
         int32_t Quantity();

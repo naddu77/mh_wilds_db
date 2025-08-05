@@ -132,7 +132,11 @@
     <ClInclude Include="CraftingCost.h" />
     <ClInclude Include="Decoration.h" />
     <ClInclude Include="DecorationIcon.h" />
+    <ClInclude Include="DualBlades.h" />
+    <ClInclude Include="EnumMap.h" />
+    <ClInclude Include="GreatSword.h" />
     <ClInclude Include="Gunlance.h" />
+    <ClInclude Include="Hammer.h" />
     <ClInclude Include="HeavyBowgun.h" />
     <ClInclude Include="HeavyBowgunAmmo.h" />
     <ClInclude Include="HuntingHorn.h" />
@@ -144,8 +148,12 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemIcon.h" />
     <ClInclude Include="ItemRecipe.h" />
+    <ClInclude Include="Lance.h" />
     <ClInclude Include="LightBowgun.h" />
     <ClInclude Include="LightBowgunAmmo.h" />
+    <ClInclude Include="LongSword.h" />
+    <ClInclude Include="MiniArmorSet.h" />
+    <ClInclude Include="MiniWeapon.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Database.h">
       <DependentUpon>Database.cpp</DependentUpon>
@@ -156,6 +164,7 @@
     <ClInclude Include="SkillIcon.h" />
     <ClInclude Include="SkillRank.h" />
     <ClInclude Include="SwitchAxe.h" />
+    <ClInclude Include="SwordShield.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="WeaponCrafting.h" />
     <ClInclude Include="WeaponDamage.h" />
@@ -180,7 +189,11 @@
     <ClCompile Include="CraftingCost.cpp" />
     <ClCompile Include="Decoration.cpp" />
     <ClCompile Include="DecorationIcon.cpp" />
+    <ClCompile Include="DualBlades.cpp" />
+    <ClCompile Include="EnumMap.cpp" />
+    <ClCompile Include="GreatSword.cpp" />
     <ClCompile Include="Gunlance.cpp" />
+    <ClCompile Include="Hammer.cpp" />
     <ClCompile Include="HeavyBowgun.cpp" />
     <ClCompile Include="HeavyBowgunAmmo.cpp" />
     <ClCompile Include="HuntingHorn.cpp" />
@@ -192,8 +205,12 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemIcon.cpp" />
     <ClCompile Include="ItemRecipe.cpp" />
+    <ClCompile Include="Lance.cpp" />
     <ClCompile Include="LightBowgun.cpp" />
     <ClCompile Include="LightBowgunAmmo.cpp" />
+    <ClCompile Include="LongSword.cpp" />
+    <ClCompile Include="MiniArmorSet.cpp" />
+    <ClCompile Include="MiniWeapon.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -205,6 +222,7 @@
     <ClCompile Include="SkillIcon.cpp" />
     <ClCompile Include="SkillRank.cpp" />
     <ClCompile Include="SwitchAxe.cpp" />
+    <ClCompile Include="SwordShield.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="WeaponCrafting.cpp" />
     <ClCompile Include="WeaponDamage.cpp" />

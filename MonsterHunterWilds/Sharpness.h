@@ -5,6 +5,9 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct Sharpness : SharpnessT<Sharpness>
     {
+        static winrt::MonsterHunterWilds::Sharpness Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
+        Sharpness() = default;
         Sharpness(int32_t red, int32_t orange, int32_t yellow, int32_t green, int32_t blue, int32_t white, int32_t purple);
 
         int32_t Red();

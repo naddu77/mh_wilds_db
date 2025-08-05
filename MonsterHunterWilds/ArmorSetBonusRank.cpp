@@ -4,6 +4,15 @@
 
 namespace winrt::MonsterHunterWilds::implementation
 {
+    winrt::MonsterHunterWilds::ArmorSetBonusRank ArmorSetBonusRank::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        return {
+            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            static_cast<int32_t>(json_object.GetNamedNumber(L"pieces")),
+            winrt::MonsterHunterWilds::SkillRank::Parse(json_object.GetNamedObject(L"skill"))
+        };
+    }
+
     ArmorSetBonusRank::ArmorSetBonusRank(int32_t id, int32_t pieces, winrt::MonsterHunterWilds::SkillRank const& skill)
         : id_{ id }, pieces_{ pieces }, skill_{ skill }
     {

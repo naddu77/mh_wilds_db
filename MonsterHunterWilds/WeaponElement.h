@@ -5,6 +5,8 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct WeaponElement : WeaponElementT<WeaponElement>
     {
+        static winrt::MonsterHunterWilds::WeaponElement Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
         WeaponElement(int32_t id, winrt::MonsterHunterWilds::WeaponDamage const& damage, bool hidden, winrt::MonsterHunterWilds::Element const& element);
 
         winrt::MonsterHunterWilds::Element Element();
