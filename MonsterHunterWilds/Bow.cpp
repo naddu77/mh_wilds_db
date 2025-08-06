@@ -18,14 +18,18 @@ namespace winrt::MonsterHunterWilds::implementation
             winrt::MonsterHunterWilds::JsonParser::ParseWeaponSpecials(json_object),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"sharpness", [](auto const& json_value) { return winrt::MonsterHunterWilds::Sharpness::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::Sharpness>(),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedInt32Array(json_object, L"handicraft"),
-            winrt::MonsterHunterWilds::JsonParser::ParseSkillRanks(json_object.GetNamedArray(L"skills")),
+            winrt::MonsterHunterWilds::SkillRank::ParseJsonArray(json_object.GetNamedArray(L"skills")),
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"defenseBonus"),
             winrt::MonsterHunterWilds::EnumMap::TryEldersealMap(json_object, L"elderseal"),
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"affinity"),
             winrt::MonsterHunterWilds::JsonParser::ParseNamedInt32Array(json_object, L"slots"),
             winrt::MonsterHunterWilds::WeaponCrafting::Parse(json_object.GetNamedObject(L"crafting")),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"series", [](auto const& json_value) { return winrt::MonsterHunterWilds::WeaponSeries::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::WeaponSeries>(),
-            winrt::MonsterHunterWilds::JsonParser::ParseBowCoatings(json_object)
+            winrt::single_threaded_vector(
+                json_object.GetNamedArray(L"coatings")
+                | std::views::transform([](auto const& json_value) { return winrt::MonsterHunterWilds::EnumMap::BowCoatingMap(json_value.GetString()); })
+                | std::ranges::to<std::vector>()
+            )
         };
     }
 

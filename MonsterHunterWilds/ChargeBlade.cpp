@@ -18,7 +18,7 @@ namespace winrt::MonsterHunterWilds::implementation
             winrt::MonsterHunterWilds::JsonParser::ParseWeaponSpecials(json_object),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"sharpness", [](auto const& json_value) { return winrt::MonsterHunterWilds::Sharpness::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::Sharpness>(),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedInt32Array(json_object, L"handicraft"),
-            winrt::MonsterHunterWilds::JsonParser::ParseSkillRanks(json_object.GetNamedArray(L"skills")),
+            winrt::MonsterHunterWilds::SkillRank::ParseJsonArray(json_object.GetNamedArray(L"skills")),
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"defenseBonus"),
             winrt::MonsterHunterWilds::EnumMap::TryEldersealMap(json_object, L"elderseal"),
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"affinity"),

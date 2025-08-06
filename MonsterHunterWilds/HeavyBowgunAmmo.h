@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct HeavyBowgunAmmo : HeavyBowgunAmmoT<HeavyBowgunAmmo>
     {
         static winrt::MonsterHunterWilds::HeavyBowgunAmmo Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::HeavyBowgunAmmo> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         HeavyBowgunAmmo(winrt::MonsterHunterWilds::AmmoKind const& kind, int32_t level, int32_t capacity);
 

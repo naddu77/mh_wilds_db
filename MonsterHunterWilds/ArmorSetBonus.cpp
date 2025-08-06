@@ -9,7 +9,7 @@ namespace winrt::MonsterHunterWilds::implementation
         return {
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             winrt::MonsterHunterWilds::Skill::Parse(json_object.GetNamedObject(L"skill")),
-            winrt::MonsterHunterWilds::JsonParser::ParseArmorSetBonusRanks(json_object.GetNamedArray(L"ranks"))
+            winrt::MonsterHunterWilds::ArmorSetBonusRank::ParseJsonArray(json_object.GetNamedArray(L"ranks"))
         };
     }
 

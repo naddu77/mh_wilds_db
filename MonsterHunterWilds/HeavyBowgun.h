@@ -5,7 +5,7 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct HeavyBowgun : HeavyBowgunT<HeavyBowgun>
     {
-        static winrt::MonsterHunterWilds::HeavyBowgun Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::MonsterHunterWilds::HeavyBowgun Parse(winrt::Windows::Data::Json::JsonObject const& json_object);        
 
         HeavyBowgun(
             int32_t id,

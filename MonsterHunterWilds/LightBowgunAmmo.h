@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct LightBowgunAmmo : LightBowgunAmmoT<LightBowgunAmmo>
     {
         static winrt::MonsterHunterWilds::LightBowgunAmmo Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::LightBowgunAmmo> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         LightBowgunAmmo(winrt::MonsterHunterWilds::AmmoKind const& kind, int32_t level, int32_t capacity, bool rapid);
 

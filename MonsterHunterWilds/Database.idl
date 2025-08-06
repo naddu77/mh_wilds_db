@@ -308,6 +308,7 @@ namespace MonsterHunterWilds
     runtimeclass ArmorSetBonusRank
     {
         static ArmorSetBonusRank Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         ArmorSetBonusRank(Int32 id, Int32 pieces, SkillRank skill);
 
@@ -948,6 +949,7 @@ namespace MonsterHunterWilds
     runtimeclass LightBowgunAmmo
     {
         static LightBowgunAmmo Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<LightBowgunAmmo> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
 		LightBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity, Boolean rapid);
 
@@ -1128,6 +1130,7 @@ namespace MonsterHunterWilds
     runtimeclass HeavyBowgunAmmo
     {
         static HeavyBowgunAmmo Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<HeavyBowgunAmmo> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         HeavyBowgunAmmo(AmmoKind kind, Int32 level, Int32 capacity);
 
@@ -1229,12 +1232,6 @@ namespace MonsterHunterWilds
         static Windows.Foundation.Collections.IVector<WeaponSpecial> ParseWeaponSpecials(Windows.Data.Json.JsonObject json_object);
         static Weapon ParseWeapon(Windows.Data.Json.JsonObject json_object);
         static Windows.Foundation.Collections.IVector<Weapon> ParseWeapons(Windows.Data.Json.JsonArray json_array);
-        
-        static Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ParseArmorSetBonusRanks(Windows.Data.Json.JsonArray json_array);
-        static Windows.Foundation.Collections.IVector<SkillRank> ParseSkillRanks(Windows.Data.Json.JsonArray json_array);
-        static Windows.Foundation.Collections.IVector<BowCoating> ParseBowCoatings(Windows.Data.Json.JsonObject json_object);
-        static Windows.Foundation.Collections.IVector<LightBowgunAmmo> ParseLightBowgunAmmos(Windows.Data.Json.JsonObject json_object);
-        static Windows.Foundation.Collections.IVector<HeavyBowgunAmmo> ParseHeavyBowgunAmmos(Windows.Data.Json.JsonObject json_object);
     }
 
     [default_interface]
