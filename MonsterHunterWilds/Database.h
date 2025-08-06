@@ -15,11 +15,13 @@ namespace winrt::MonsterHunterWilds::implementation
 
         winrt::Windows::Foundation::IAsyncAction SaveUrlToFile(winrt::hstring url, winrt::hstring file_name);
 
-        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetWeaponsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetArmorsJsonAsync();
-        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetSkillsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetArmorSetsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetCharmsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetDecorationsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetItemsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetSkillsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetWeaponsJsonAsync();
 
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor>> GetArmorsAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSet>> GetArmorSetsAsync();

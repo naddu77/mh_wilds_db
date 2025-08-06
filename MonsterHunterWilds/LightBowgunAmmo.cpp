@@ -20,7 +20,7 @@ namespace winrt::MonsterHunterWilds::implementation
         , capacity_{ capacity }
         , rapid_{ rapid }
     {
-        throw hresult_not_implemented();
+        
     }
 
     winrt::MonsterHunterWilds::AmmoKind LightBowgunAmmo::Kind()

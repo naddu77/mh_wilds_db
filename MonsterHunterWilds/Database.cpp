@@ -57,19 +57,14 @@ namespace winrt::MonsterHunterWilds::implementation
         co_await winrt::Windows::Storage::FileIO::WriteTextAsync(storage_file, skills_json);
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetWeaponsJsonAsync()
-    {
-        co_return co_await GetJsonArrayAsync(api.WeaponsUrl());
-    }
-
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetArmorsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(api.ArmorUrl());
     }
 
-    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsJsonAsync()
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetArmorSetsJsonAsync()
     {
-        co_return co_await GetJsonArrayAsync(api.SkillsUrl());
+        co_return co_await GetJsonArrayAsync(api.ArmorSetsUrl());
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetCharmsJsonAsync()
@@ -82,14 +77,36 @@ namespace winrt::MonsterHunterWilds::implementation
         co_return co_await GetJsonArrayAsync(api.DecorationsUrl());
     }
 
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetItemsJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.ItemsUrl());
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.SkillsUrl());
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetWeaponsJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.WeaponsUrl());
+    }
+
+
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor>> Database::GetArmorsAsync()
     {
-        throw hresult_not_implemented();
+        auto json_object{ co_await GetArmorsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Armor::Parse(json.GetObject()); }) };
+
+        co_return result;
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSet>> Database::GetArmorSetsAsync()
     {
-        throw hresult_not_implemented();
+        auto json_object{ co_await GetArmorSetsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json_value) { return winrt::MonsterHunterWilds::ArmorSet::Parse(json_value.GetObject()); }) };
+
+        co_return result;
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Charm>> Database::GetCharmsAsync()
@@ -110,7 +127,10 @@ namespace winrt::MonsterHunterWilds::implementation
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item>> Database::GetItemsAsync()
     {
-        throw hresult_not_implemented();
+        auto json_object{ co_await GetItemsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Item::Parse(json.GetObject()); }) };
+
+        co_return result;
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()
@@ -123,6 +143,9 @@ namespace winrt::MonsterHunterWilds::implementation
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon>> Database::GetWeaponsAsync()
     {
-        throw hresult_not_implemented();
+        auto json_object{ co_await GetWeaponsJsonAsync() };
+        auto result{ ParseJsonArray(json_object, [](auto const& json_value) { return winrt::MonsterHunterWilds::JsonParser::ParseWeapon(json_value.GetObject()); }) };
+
+        co_return result;
     }
 }

@@ -9,7 +9,7 @@ namespace winrt::MonsterHunterWilds::implementation
         return {
             static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
             static_cast<int32_t>(json_object.GetNamedNumber(L"gameId")),
-            winrt::MonsterHunterWilds::EnumMap::HuntingHornBubbleKindMap(L"kind"),
+            winrt::MonsterHunterWilds::EnumMap::HuntingHornBubbleKindMap(json_object.GetNamedString(L"kind")),
             json_object.GetNamedString(L"name")
         };
     }

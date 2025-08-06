@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct ArmorSetBonus : ArmorSetBonusT<ArmorSetBonus>
     {
         static winrt::MonsterHunterWilds::ArmorSetBonus Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::MonsterHunterWilds::ArmorSetBonus TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key);
 
         ArmorSetBonus(int32_t id, winrt::MonsterHunterWilds::Skill const& skill, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSetBonusRank> const& ranks);
 

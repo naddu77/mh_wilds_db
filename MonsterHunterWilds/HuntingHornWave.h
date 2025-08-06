@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct HuntingHornWave : HuntingHornWaveT<HuntingHornWave>
     {
         static winrt::MonsterHunterWilds::HuntingHornWave Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::MonsterHunterWilds::HuntingHornWave TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key);
 
         HuntingHornWave(int32_t id, int32_t game_id, winrt::MonsterHunterWilds::HuntingHornWaveKind const& kind, hstring const& name);
 

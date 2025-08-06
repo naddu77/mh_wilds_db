@@ -5,7 +5,9 @@ namespace winrt::MonsterHunterWilds::implementation
 {
     struct LightBowgun : LightBowgunT<LightBowgun>
     {
-        LightBowgun(int32_t id, int32_t game_id, winrt::MonsterHunterWilds::WeaponKind const& kind, hstring const& name, int32_t rarity, winrt::MonsterHunterWilds::WeaponDamage const& damage, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> const& specials, winrt::MonsterHunterWilds::Sharpness const& sharpness, winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, int32_t defense_bonus, winrt::MonsterHunterWilds::Elderseal const& elderseal, int32_t affinity, winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots, winrt::MonsterHunterWilds::WeaponCrafting const& crafting, winrt::MonsterHunterWilds::WeaponSeries const& series, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::LightBowgunAmmo> const& ammo, winrt::MonsterHunterWilds::LightBowgunSpecialAmmo const& special_ammo);
+        static winrt::MonsterHunterWilds::LightBowgun Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+
+        LightBowgun(int32_t id, int32_t game_id, winrt::MonsterHunterWilds::WeaponKind const& kind, hstring const& name, int32_t rarity, winrt::MonsterHunterWilds::WeaponDamage const& damage, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> const& specials, winrt::MonsterHunterWilds::Sharpness const& sharpness, winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, int32_t defense_bonus, winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> const& elderseal, int32_t affinity, winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots, winrt::MonsterHunterWilds::WeaponCrafting const& crafting, winrt::MonsterHunterWilds::WeaponSeries const& series, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::LightBowgunAmmo> const& ammo, winrt::MonsterHunterWilds::LightBowgunSpecialAmmo const& special_ammo);
         
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::LightBowgunAmmo> Ammo();
         winrt::MonsterHunterWilds::LightBowgunSpecialAmmo SpecialAmmo();
@@ -20,7 +22,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::Collections::IVector<int32_t> Handicraft();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> Skills();
         int32_t DefenseBonus();
-        winrt::MonsterHunterWilds::Elderseal Elderseal();
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> Elderseal();
         int32_t Affinity();
         winrt::Windows::Foundation::Collections::IVector<int32_t> Slots();
         winrt::MonsterHunterWilds::WeaponCrafting Crafting();
@@ -40,7 +42,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::Collections::IVector<int32_t> handicraft_;
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> skills_;
         int32_t defense_bonus_;
-        winrt::MonsterHunterWilds::Elderseal elderseal_;
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> elderseal_;
         int32_t affinity_;
         winrt::Windows::Foundation::Collections::IVector<int32_t> slots_;
         winrt::MonsterHunterWilds::WeaponCrafting crafting_;

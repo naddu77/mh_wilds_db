@@ -148,6 +148,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemIcon.h" />
     <ClInclude Include="ItemRecipe.h" />
+    <ClInclude Include="JsonParser.h" />
     <ClInclude Include="Lance.h" />
     <ClInclude Include="LightBowgun.h" />
     <ClInclude Include="LightBowgunAmmo.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemIcon.cpp" />
     <ClCompile Include="ItemRecipe.cpp" />
+    <ClCompile Include="JsonParser.cpp" />
     <ClCompile Include="Lance.cpp" />
     <ClCompile Include="LightBowgun.cpp" />
     <ClCompile Include="LightBowgunAmmo.cpp" />

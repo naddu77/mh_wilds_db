@@ -14,6 +14,20 @@ namespace winrt::MonsterHunterWilds::implementation
         };
     }
 
+    winrt::MonsterHunterWilds::SkillIcon SkillIcon::TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key)
+    {
+        if (json_object.HasKey(key))
+        {
+            if (auto json_value{ json_object.GetNamedValue(key) };
+                json_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::Object)
+            {
+                return Parse(json_value.GetObject());
+            }
+        }
+
+        return nullptr;
+    }
+
     SkillIcon::SkillIcon(int32_t game_id, winrt::MonsterHunterWilds::SkillIconKind const& kind)
         : game_id_{ game_id }, kind_{ kind }
     {

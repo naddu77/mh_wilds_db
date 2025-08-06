@@ -8,7 +8,7 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         return {
             winrt::MonsterHunterWilds::EnumMap::SwitchAxePhialMap(json_object.GetNamedString(L"kind")),
-            winrt::MonsterHunterWilds::WeaponDamage::Parse(json_object.GetNamedObject(L"damage"))
+            winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"damage", [](auto const& json_value) { return winrt::MonsterHunterWilds::WeaponDamage::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::WeaponDamage>()
         };
     }
 

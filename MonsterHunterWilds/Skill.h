@@ -14,14 +14,14 @@ namespace winrt::MonsterHunterWilds::implementation
             hstring const& name,
             hstring const& description,
             winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& ranks,
-            winrt::MonsterHunterWilds::SkillKind const& kind,
+            winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind> const& kind,
             winrt::MonsterHunterWilds::SkillIcon const& icon);
         
         int32_t Id();
         hstring Name();
         hstring Description();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> Ranks();
-        winrt::MonsterHunterWilds::SkillKind Kind();
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind> Kind();
         winrt::MonsterHunterWilds::SkillIcon Icon();
 
     private:
@@ -29,7 +29,7 @@ namespace winrt::MonsterHunterWilds::implementation
 		hstring name_;
 		hstring description_;
 		winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> ranks_;
-		winrt::MonsterHunterWilds::SkillKind kind_;
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind> kind_;
 		winrt::MonsterHunterWilds::SkillIcon icon_;
     };
 }

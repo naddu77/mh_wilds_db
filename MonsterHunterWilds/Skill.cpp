@@ -2,19 +2,17 @@
 #include "Skill.h"
 #include "Skill.g.cpp"
 
-#include "Util.h"
-
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::Skill Skill::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             json_object.GetNamedString(L"name"),
-            TryGetNamedString(json_object, L"description"),
-            ParseJsonArray(json_object.GetNamedArray(L"ranks"), [](auto const& r) { return SkillRank::Parse(r.GetObject()); }),
-            winrt::MonsterHunterWilds::EnumMap::SkillKindMap(json_object.GetNamedString(L"kind")),
-            winrt::MonsterHunterWilds::SkillIcon::Parse(json_object.GetNamedObject(L"icon"))
+            winrt::MonsterHunterWilds::JsonParser::TryGetNamedString(json_object, L"description"),
+            winrt::MonsterHunterWilds::SkillRank::TryParse(json_object, L"ranks"),
+            json_object.HasKey(L"kind") ? winrt::MonsterHunterWilds::EnumMap::SkillKindMap(json_object.GetNamedString(L"kind")) : winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind>{},
+            winrt::MonsterHunterWilds::SkillIcon::TryParse(json_object, L"icon")
         };
     }
 
@@ -23,7 +21,7 @@ namespace winrt::MonsterHunterWilds::implementation
         hstring const& name,
         hstring const& description,
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& ranks,
-        winrt::MonsterHunterWilds::SkillKind const& kind,
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind> const& kind,
         winrt::MonsterHunterWilds::SkillIcon const& icon)
         : id_{ id }
         , name_{ name }
@@ -55,7 +53,7 @@ namespace winrt::MonsterHunterWilds::implementation
 		return ranks_;
     }
 
-    winrt::MonsterHunterWilds::SkillKind Skill::Kind()
+    winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind> Skill::Kind()
     {
         return kind_;
     }

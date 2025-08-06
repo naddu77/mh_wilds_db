@@ -16,6 +16,20 @@ namespace winrt::MonsterHunterWilds::implementation
         };
     }
 
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> SkillRank::TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key)
+    {
+        if (json_object.HasKey(key))
+        {
+            return winrt::single_threaded_vector(
+                json_object.GetNamedArray(key)
+                | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+                | std::ranges::to<std::vector>()
+            );
+        }
+
+        return nullptr;
+    }
+
     SkillRank::SkillRank(int32_t id, hstring const& name, hstring const& description, int32_t level)
         : id_{ id }, name_{ name }, description_{ description }, level_{ level }
     {

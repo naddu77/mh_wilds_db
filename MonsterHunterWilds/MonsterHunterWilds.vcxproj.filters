@@ -64,6 +64,7 @@
     <ClCompile Include="Hammer.cpp" />
     <ClCompile Include="Lance.cpp" />
     <ClCompile Include="LongSword.cpp" />
+    <ClCompile Include="JsonParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Hammer.h" />
     <ClInclude Include="Lance.h" />
     <ClInclude Include="LongSword.h" />
+    <ClInclude Include="JsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonsterHunterWilds.def" />

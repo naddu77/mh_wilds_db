@@ -33,7 +33,7 @@ namespace winrt::MonsterHunterWilds::implementation
             TryParseNamedArray(json_object, L"handicraft", [](auto const& h) { return static_cast<int32_t>(h.GetNumber()); }),
             ParseJsonArray(json_object.GetNamedArray(L"skills"), [](auto const& s) { return winrt::MonsterHunterWilds::SkillRank::Parse(s.GetObject()); }),
             static_cast<int32_t>(json_object.GetNamedNumber(L"defenseBonus")),
-            winrt::MonsterHunterWilds::EnumMap::EldersealMap(json_object.GetNamedString(L"elderseal")),
+            winrt::MonsterHunterWilds::EnumMap::TryEldersealMap(json_object, L"elderseal"),
             static_cast<int32_t>(json_object.GetNamedNumber(L"affinity")),
             ParseJsonArray(json_object.GetNamedArray(L"slots"), [](auto const& s) { return static_cast<int32_t>(s.GetNumber()); }),
             winrt::MonsterHunterWilds::WeaponCrafting::Parse(json_object.GetNamedObject(L"crafting")),
@@ -54,7 +54,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft,
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills,
         int32_t defense_bonus,
-        winrt::MonsterHunterWilds::Elderseal const& elderseal,
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> const& elderseal,
         int32_t affinity,
         winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots,
         winrt::MonsterHunterWilds::WeaponCrafting const& crafting,
@@ -141,7 +141,7 @@ namespace winrt::MonsterHunterWilds::implementation
         return defense_bonus_;
     }
 
-    winrt::MonsterHunterWilds::Elderseal ChargeBlade::Elderseal()
+    winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> ChargeBlade::Elderseal()
     {
         return elderseal_;
     }

@@ -15,6 +15,7 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::MonsterHunterWilds::Rank RankMap(hstring const& str);
         static winrt::MonsterHunterWilds::DecorationKind DecorationKindMap(hstring const& str);
         static winrt::MonsterHunterWilds::Elderseal EldersealMap(hstring const& str);
+        static winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> TryEldersealMap(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key);
         static winrt::MonsterHunterWilds::WeaponKind WeaponKindMap(hstring const& str);
         static winrt::MonsterHunterWilds::ChargeBladePhial ChargeBladePhialMap(hstring const& str);
         static winrt::MonsterHunterWilds::SwitchAxePhial SwitchAxePhialMap(hstring const& str);
@@ -22,6 +23,9 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::MonsterHunterWilds::HuntingHornBubbleKind HuntingHornBubbleKindMap(hstring const& str);
         static winrt::MonsterHunterWilds::AmmoKind AmmoKindMap(hstring const& str);
         static winrt::MonsterHunterWilds::HuntingHornWaveKind HuntingHornWaveKindMap(hstring const& str);
+        static winrt::MonsterHunterWilds::BowCoating BowCoatingMap(hstring const& str);
+        static winrt::MonsterHunterWilds::GunlanceShell GunlanceShellMap(hstring const& str);
+        static winrt::MonsterHunterWilds::LightBowgunSpecialAmmo LightBowgunSpecialAmmoMap(hstring const& str);
     };
 }
 

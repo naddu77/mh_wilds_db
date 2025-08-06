@@ -19,7 +19,7 @@ namespace winrt::MonsterHunterWilds::implementation
             winrt::Windows::Foundation::Collections::IVector<int32_t> const& handicraft,
             winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills,
             int32_t defense_bonus,
-            winrt::MonsterHunterWilds::Elderseal const& elderseal,
+            winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> const& elderseal,
             int32_t affinity,
             winrt::Windows::Foundation::Collections::IVector<int32_t> const& slots,
             winrt::MonsterHunterWilds::WeaponCrafting const& crafting,
@@ -38,7 +38,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::Collections::IVector<int32_t> Handicraft();
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> Skills();
         int32_t DefenseBonus();
-        winrt::MonsterHunterWilds::Elderseal Elderseal();
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> Elderseal();
         int32_t Affinity();
         winrt::Windows::Foundation::Collections::IVector<int32_t> Slots();
         winrt::MonsterHunterWilds::WeaponCrafting Crafting();
@@ -57,7 +57,7 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::Collections::IVector<int32_t> handicraft_;
         winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> skills_;
         int32_t defense_bonus_;
-        winrt::MonsterHunterWilds::Elderseal elderseal_;
+        winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> const& elderseal_;
         int32_t affinity_;
         winrt::Windows::Foundation::Collections::IVector<int32_t> slots_;
         winrt::MonsterHunterWilds::WeaponCrafting crafting_;

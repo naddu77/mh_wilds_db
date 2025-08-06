@@ -8,7 +8,7 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         return {
             static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
-            json_object.GetNamedString(L"name")
+            winrt::MonsterHunterWilds::JsonParser::TryGetNamedString(json_object, L"name")
         };
     }
 

@@ -50,6 +50,7 @@ namespace winrt::MonsterHunterWilds::implementation
             { L"armor-sphere", winrt::MonsterHunterWilds::ItemIconKind::ArmorSphere },
             { L"barrel", winrt::MonsterHunterWilds::ItemIconKind::Barrel },
             { L"binoculars", winrt::MonsterHunterWilds::ItemIconKind::Binoculars },
+            { L"bomb", winrt::MonsterHunterWilds::ItemIconKind::Bomb },
             { L"bone", winrt::MonsterHunterWilds::ItemIconKind::Bone },
             { L"bug", winrt::MonsterHunterWilds::ItemIconKind::Bug },
             { L"camping-kit", winrt::MonsterHunterWilds::ItemIconKind::CampingKit },
@@ -100,6 +101,7 @@ namespace winrt::MonsterHunterWilds::implementation
             { L"tail", winrt::MonsterHunterWilds::ItemIconKind::Tail },
             { L"trap", winrt::MonsterHunterWilds::ItemIconKind::Trap },
             { L"trap-tool", winrt::MonsterHunterWilds::ItemIconKind::TrapTool },
+            { L"unknown",  winrt::MonsterHunterWilds::ItemIconKind::Unknown },
             { L"voucher", winrt::MonsterHunterWilds::ItemIconKind::Voucher },
             { L"web", winrt::MonsterHunterWilds::ItemIconKind::Web },
             { L"whetstone", winrt::MonsterHunterWilds::ItemIconKind::Whetstone },
@@ -269,16 +271,30 @@ namespace winrt::MonsterHunterWilds::implementation
         throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
     }
 
+    winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::Elderseal> EnumMap::TryEldersealMap(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key)
+    {
+        if (json_object.HasKey(key))
+        {
+            if (auto named_value{ json_object.GetNamedValue(key) };
+                named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::String)
+            {
+                return EldersealMap(named_value.GetString());
+            }
+        }
+
+        return {};
+    }
+
     winrt::MonsterHunterWilds::WeaponKind EnumMap::WeaponKindMap(hstring const& str)
     {
         static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::WeaponKind> const weapon_kind_map{
             { L"bow", winrt::MonsterHunterWilds::WeaponKind::Bow },
-            { L"hunting-horn	", winrt::MonsterHunterWilds::WeaponKind::HuntingHorn },
-            { L"charge-blade	", winrt::MonsterHunterWilds::WeaponKind::ChargeBlade },
+            { L"hunting-horn", winrt::MonsterHunterWilds::WeaponKind::HuntingHorn },
+            { L"charge-blade", winrt::MonsterHunterWilds::WeaponKind::ChargeBlade },
             { L"insect-glaive", winrt::MonsterHunterWilds::WeaponKind::InsectGlaive },
             { L"dual-blades", winrt::MonsterHunterWilds::WeaponKind::DualBlades },
             { L"lance", winrt::MonsterHunterWilds::WeaponKind::Lance },
-            { L"great-sword", winrt::MonsterHunterWilds::WeaponKind::Gunlance },
+            { L"great-sword", winrt::MonsterHunterWilds::WeaponKind::GreatSword },
             { L"light-bowgun", winrt::MonsterHunterWilds::WeaponKind::LightBowgun },
             { L"gunlance", winrt::MonsterHunterWilds::WeaponKind::Gunlance },
             { L"long-sword", winrt::MonsterHunterWilds::WeaponKind::LongSword },
@@ -301,7 +317,7 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::ChargeBladePhial> const charge_blade_phial_map{
             { L"element", winrt::MonsterHunterWilds::ChargeBladePhial::Element },
-            { L"impact	", winrt::MonsterHunterWilds::ChargeBladePhial::Impact }
+            { L"impact", winrt::MonsterHunterWilds::ChargeBladePhial::Impact }
         };
 
         if (auto found{ charge_blade_phial_map.find(str) };
@@ -321,7 +337,7 @@ namespace winrt::MonsterHunterWilds::implementation
            { L"dragon", winrt::MonsterHunterWilds::SwitchAxePhial::Dragon },
            { L"exhaust", winrt::MonsterHunterWilds::SwitchAxePhial::Exhaust },
            { L"paralyze", winrt::MonsterHunterWilds::SwitchAxePhial::Parayze },
-           { L"poison	", winrt::MonsterHunterWilds::SwitchAxePhial::Poison }
+           { L"poison", winrt::MonsterHunterWilds::SwitchAxePhial::Poison }
         };
 
         if (auto found{ switch_axe_phial_map.find(str) };
@@ -341,9 +357,9 @@ namespace winrt::MonsterHunterWilds::implementation
            { L"orange", winrt::MonsterHunterWilds::HuntingHornNote::Orange },
            { L"yellow", winrt::MonsterHunterWilds::HuntingHornNote::Yellow },
            { L"green", winrt::MonsterHunterWilds::HuntingHornNote::Green },
-           { L"blue	", winrt::MonsterHunterWilds::HuntingHornNote::Blue },
-           { L"aqua	", winrt::MonsterHunterWilds::HuntingHornNote::Aqua },
-           { L"white	", winrt::MonsterHunterWilds::HuntingHornNote::White },
+           { L"blue", winrt::MonsterHunterWilds::HuntingHornNote::Blue },
+           { L"aqua", winrt::MonsterHunterWilds::HuntingHornNote::Aqua },
+           { L"white", winrt::MonsterHunterWilds::HuntingHornNote::White },
         };
 
         if (auto found{ hunting_horn_note_map.find(str) };
@@ -363,7 +379,7 @@ namespace winrt::MonsterHunterWilds::implementation
            { L"regen", winrt::MonsterHunterWilds::HuntingHornBubbleKind::Regen },
            { L"defense", winrt::MonsterHunterWilds::HuntingHornBubbleKind::Defense },
            { L"stamina", winrt::MonsterHunterWilds::HuntingHornBubbleKind::Stamina },
-           { L"immunity	", winrt::MonsterHunterWilds::HuntingHornBubbleKind::Immunity }
+           { L"immunity", winrt::MonsterHunterWilds::HuntingHornBubbleKind::Immunity }
         };
 
         if (auto found{ hunting_horn_bubble_kind_map.find(str) };
@@ -434,4 +450,58 @@ namespace winrt::MonsterHunterWilds::implementation
         throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
     }
 
+    winrt::MonsterHunterWilds::BowCoating EnumMap::BowCoatingMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::BowCoating> const bow_coating_map{
+            { L"close-range", winrt::MonsterHunterWilds::BowCoating::CloseRange },
+            { L"power",       winrt::MonsterHunterWilds::BowCoating::Power },
+            { L"pierce",      winrt::MonsterHunterWilds::BowCoating::Pierce },
+            { L"paralysis",   winrt::MonsterHunterWilds::BowCoating::Paralysis },
+            { L"poison",      winrt::MonsterHunterWilds::BowCoating::Poison },
+            { L"sleep",       winrt::MonsterHunterWilds::BowCoating::Sleep },
+            { L"blast",       winrt::MonsterHunterWilds::BowCoating::Blast },
+            { L"exhaust",     winrt::MonsterHunterWilds::BowCoating::Exhaust },
+        };
+
+        if (auto found = bow_coating_map.find(str);
+            found != bow_coating_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::GunlanceShell EnumMap::GunlanceShellMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::GunlanceShell> const gunlance_shell_map{
+            { L"normal", winrt::MonsterHunterWilds::GunlanceShell::Normal },
+            { L"wide",   winrt::MonsterHunterWilds::GunlanceShell::Wide },
+            { L"long",   winrt::MonsterHunterWilds::GunlanceShell::Long },
+        };
+
+        if (auto found = gunlance_shell_map.find(str);
+            found != gunlance_shell_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::LightBowgunSpecialAmmo EnumMap::LightBowgunSpecialAmmoMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::LightBowgunSpecialAmmo> const light_bowgun_special_ammo_map{
+            { L"wyvernblast", winrt::MonsterHunterWilds::LightBowgunSpecialAmmo::Wyvernblast },
+            { L"adhesive",    winrt::MonsterHunterWilds::LightBowgunSpecialAmmo::Adhesive },
+        };
+
+        if (auto found = light_bowgun_special_ammo_map.find(str);
+            found != light_bowgun_special_ammo_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
 }

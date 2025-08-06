@@ -30,6 +30,7 @@ namespace MonsterHunterWilds
     runtimeclass SkillIcon
     {
         static SkillIcon Parse(Windows.Data.Json.JsonObject json_object);
+        static SkillIcon TryParse(Windows.Data.Json.JsonObject json_object, String key);
 
         SkillIcon(Int32 game_id, SkillIconKind kind);
 
@@ -40,6 +41,7 @@ namespace MonsterHunterWilds
     runtimeclass SkillRank
     {
         static SkillRank Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<SkillRank> TryParse(Windows.Data.Json.JsonObject json_object, String key);
 
 		SkillRank(Int32 id, String name, String description, Int32 level);
 
@@ -53,13 +55,13 @@ namespace MonsterHunterWilds
     {
         static Skill Parse(Windows.Data.Json.JsonObject json_object);
 
-		Skill(Int32 id, String name, String description, Windows.Foundation.Collections.IVector<SkillRank> ranks, SkillKind kind, SkillIcon icon);
+		Skill(Int32 id, String name, String description, Windows.Foundation.Collections.IVector<SkillRank> ranks, Windows.Foundation.IReference<SkillKind> kind, SkillIcon icon);
 
 		Int32 Id{ get; };
 	    String Name{ get; };
 		String Description{ get; };
 		Windows.Foundation.Collections.IVector<SkillRank> Ranks{ get; };
-		SkillKind Kind{ get; };
+		Windows.Foundation.IReference<SkillKind> Kind{ get; };
 		SkillIcon Icon{ get; };
     }
 
@@ -111,6 +113,7 @@ namespace MonsterHunterWilds
         ArmorSphere,
         Barrel,
         Binoculars,
+        Bomb,
         Bone,
         Bug,
         CampingKit,
@@ -161,6 +164,7 @@ namespace MonsterHunterWilds
         Tail,
         Trap,
         TrapTool,
+        Unknown,
         Voucher,
         Web,
         Whetstone,
@@ -295,6 +299,7 @@ namespace MonsterHunterWilds
     runtimeclass ArmorSetBonus
     {
         static ArmorSetBonus Parse(Windows.Data.Json.JsonObject json_object);
+        static ArmorSetBonus TryParse(Windows.Data.Json.JsonObject json_object, String key);
 
         ArmorSetBonus(Int32 id, Skill skill, Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ranks);
 
@@ -307,12 +312,12 @@ namespace MonsterHunterWilds
     {
         static ArmorSet Parse(Windows.Data.Json.JsonObject json_object);
 
-        ArmorSet(Int32 id, Int32 game_id, String name, Windows.Foundation.Collections.IVector<Armor> bonuses, ArmorSetBonus bonus, ArmorSetBonus group_bonus);
+        ArmorSet(Int32 id, Int32 game_id, String name, Windows.Foundation.Collections.IVector<Armor> pieces, ArmorSetBonus bonus, ArmorSetBonus group_bonus);
 
         Int32 Id{ get; };
 	    Int32 GameId{ get; };
         String Name{ get; };
-		Windows.Foundation.Collections.IVector<Armor> Bonuses{ get; };
+		Windows.Foundation.Collections.IVector<Armor> Pieces{ get; };
 		ArmorSetBonus Bonus{ get; };
 		ArmorSetBonus GroupBonus{ get; };
 	}
@@ -518,7 +523,7 @@ namespace MonsterHunterWilds
 		InsectGlaive,
 		DualBlades,
         Lance,
-		GrateSword,
+		GreatSword,
 		LightBowgun,
 		Gunlance,
 		LongSword,
@@ -592,7 +597,7 @@ namespace MonsterHunterWilds
 		Windows.Foundation.Collections.IVector<Int32> Handicraft{ get; };
         Windows.Foundation.Collections.IVector<SkillRank> Skills{ get; };
 		Int32 DefenseBonus{ get; };
-		Elderseal Elderseal{ get; };
+		Windows.Foundation.IReference<Elderseal> Elderseal{ get; };
 		Int32 Affinity{ get; };
         Windows.Foundation.Collections.IVector<Int32> Slots{ get; };
 		WeaponCrafting Crafting{ get; };
@@ -604,7 +609,7 @@ namespace MonsterHunterWilds
         CloseRange,
         Power,
         Pierce,
-        Paraysis,
+        Paralysis,
         Poison,
         Sleep,
         Blast,
@@ -627,7 +632,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -714,6 +719,7 @@ namespace MonsterHunterWilds
     runtimeclass HuntingHornWave
     {
         static HuntingHornWave Parse(Windows.Data.Json.JsonObject json_object);
+        static HuntingHornWave TryParse(Windows.Data.Json.JsonObject json_object, String key);
 
         HuntingHornWave(Int32 id, Int32 game_id, HuntingHornWaveKind kind, String name);
 
@@ -739,7 +745,7 @@ namespace MonsterHunterWilds
 			Windows.Foundation.Collections.IVector<Int32> handicraft,
 			Windows.Foundation.Collections.IVector<SkillRank> skills,
 			Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
 			Int32 affinity,
 			Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -751,7 +757,7 @@ namespace MonsterHunterWilds
 
         HuntingHornMelody Melody{ get; };
         HuntingHornBubble EchoBubble{ get; };
-		HuntingHornWave EchoWave{ get; };
+        HuntingHornWave EchoWave{ get; };
     }
 
     enum ChargeBladePhial
@@ -776,7 +782,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -803,7 +809,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
 			WeaponCrafting crafting,
@@ -831,7 +837,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -856,7 +862,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -881,7 +887,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -947,7 +953,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
 			Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -983,7 +989,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -1013,7 +1019,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -1038,7 +1044,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -1082,15 +1088,15 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
             WeaponSeries series,
-            SwitchAxePhial phial
+            Phial phial
 		);
 
-        SwitchAxePhial Phial{ get; };
+        Phial Phial{ get; };
 	}
 
     runtimeclass HeavyBowgunAmmo
@@ -1120,15 +1126,15 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
             WeaponSeries series,
-            HeavyBowgunAmmo ammo
+            Windows.Foundation.Collections.IVector<HeavyBowgunAmmo> ammo
         );
 
-        HeavyBowgunAmmo Ammo{ get; };
+        Windows.Foundation.Collections.IVector<HeavyBowgunAmmo> Ammo{ get; };
     }
 
     [default_interface]
@@ -1148,7 +1154,7 @@ namespace MonsterHunterWilds
             Windows.Foundation.Collections.IVector<Int32> handicraft,
             Windows.Foundation.Collections.IVector<SkillRank> skills,
             Int32 defense_bonus,
-            Elderseal elderseal,
+            Windows.Foundation.IReference<Elderseal> elderseal,
             Int32 affinity,
             Windows.Foundation.Collections.IVector<Int32> slots,
             WeaponCrafting crafting,
@@ -1175,6 +1181,36 @@ namespace MonsterHunterWilds
         String WeaponsUrl();
     }
 
+    // Json Parser
+    delegate Object JsonValueTransformer(Windows.Data.Json.IJsonValue json_value);
+    delegate Object JsonObjectTransformer(Windows.Data.Json.JsonObject json_object);
+
+    static runtimeclass JsonParser
+    {       
+        static Int32 GetNamedInt32(Windows.Data.Json.JsonObject json_object, String key);
+
+        static String TryGetNamedString(Windows.Data.Json.JsonObject json_object, String key);
+        static Windows.Foundation.IReference<Int32> TryGetNamedInt32(Windows.Data.Json.JsonObject json_object, String key);
+        
+        static Windows.Foundation.Collections.IVector<Object> ParseJsonArray(Windows.Data.Json.JsonArray json_array, JsonValueTransformer transformer);
+        static Windows.Foundation.Collections.IVector<Int32> ParseNamedInt32Array(Windows.Data.Json.JsonObject json_object, String key);
+
+        static Object TryParseNamedObject(Windows.Data.Json.JsonObject json_object, String key, JsonObjectTransformer transformer);
+        static Windows.Foundation.Collections.IVector<Object> TryParseNamedArray(Windows.Data.Json.JsonObject json_object, String key, JsonValueTransformer transformer);
+        static Windows.Foundation.Collections.IVector<Int32> TryParseNamedInt32Array(Windows.Data.Json.JsonObject json_object, String key);
+
+        static WeaponSpecial ParseWeaponSpecial(Windows.Data.Json.IJsonValue json_value);
+        static Windows.Foundation.Collections.IVector<WeaponSpecial> ParseWeaponSpecials(Windows.Data.Json.JsonObject json_object);
+        static Weapon ParseWeapon(Windows.Data.Json.JsonObject json_object);
+
+        static Windows.Foundation.Collections.IVector<Armor> ParseArmors(Windows.Data.Json.JsonArray json_array);
+        static Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ParseArmorSetBonusRanks(Windows.Data.Json.JsonArray json_array);
+        static Windows.Foundation.Collections.IVector<SkillRank> ParseSkillRanks(Windows.Data.Json.JsonArray json_array);
+        static Windows.Foundation.Collections.IVector<BowCoating> ParseBowCoatings(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<LightBowgunAmmo> ParseLightBowgunAmmos(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<HeavyBowgunAmmo> ParseHeavyBowgunAmmos(Windows.Data.Json.JsonObject json_object);
+    }
+
     [default_interface]
     runtimeclass Database
     {
@@ -1184,11 +1220,13 @@ namespace MonsterHunterWilds
         Windows.Foundation.IAsyncOperation<String> GetVersionAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetJsonArrayAsync(String url);
         Windows.Foundation.IAsyncAction SaveUrlToFile(String url, String file_name);
-        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorsJsonAsync();
-        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetArmorSetsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetItemsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
 
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Armor> > GetArmorsAsync();
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<ArmorSet> > GetArmorSetsAsync();
@@ -1211,6 +1249,7 @@ namespace MonsterHunterWilds
         static Rank RankMap(String str);
         static DecorationKind DecorationKindMap(String str);
         static Elderseal EldersealMap(String str);
+        static Windows.Foundation.IReference<Elderseal> TryEldersealMap(Windows.Data.Json.JsonObject json_object, String key);
         static WeaponKind WeaponKindMap(String str);
         static ChargeBladePhial ChargeBladePhialMap(String str);
         static SwitchAxePhial SwitchAxePhialMap(String str);
@@ -1218,5 +1257,8 @@ namespace MonsterHunterWilds
         static HuntingHornBubbleKind HuntingHornBubbleKindMap(String str);
         static AmmoKind AmmoKindMap(String str);
         static HuntingHornWaveKind HuntingHornWaveKindMap(String str);
+        static BowCoating BowCoatingMap(String str);
+        static GunlanceShell GunlanceShellMap(String str);
+        static LightBowgunSpecialAmmo LightBowgunSpecialAmmoMap(String str);
     }
 }
