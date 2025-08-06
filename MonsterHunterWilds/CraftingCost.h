@@ -7,6 +7,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct CraftingCost : CraftingCostT<CraftingCost>
     {
         static winrt::MonsterHunterWilds::CraftingCost Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CraftingCost> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         CraftingCost(int32_t quantity, winrt::MonsterHunterWilds::Item const& item);
 

@@ -2,42 +2,29 @@
 #include "ChargeBlade.h"
 #include "ChargeBlade.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::ChargeBlade ChargeBlade::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"gameId")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"gameId"),
             winrt::MonsterHunterWilds::EnumMap::WeaponKindMap(json_object.GetNamedString(L"kind")),
             json_object.GetNamedString(L"name"),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"rarity")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"rarity"),
             winrt::MonsterHunterWilds::WeaponDamage::Parse(json_object.GetNamedObject(L"damage")),
-            ParseJsonArray(json_object.GetNamedArray(L"specials"), [](auto const& s) {
-                auto kind{ s.GetObject().GetNamedString(L"kind") };
-
-                if (kind == L"element")
-                {
-                    return winrt::MonsterHunterWilds::WeaponElement::Parse(s.GetObject()).as<winrt::MonsterHunterWilds::WeaponSpecial>();
-                }
-                else if (kind == L"status")
-                {
-                    return winrt::MonsterHunterWilds::WeaponStatus::Parse(s.GetObject()).as<winrt::MonsterHunterWilds::WeaponSpecial>();
-                }
-
-                std::unreachable();
-            }),
-            TryParseNamedObject(json_object, L"sharpness", [](auto const& json_object) { return winrt::MonsterHunterWilds::Sharpness::Parse(json_object); }),
-            TryParseNamedArray(json_object, L"handicraft", [](auto const& h) { return static_cast<int32_t>(h.GetNumber()); }),
-            ParseJsonArray(json_object.GetNamedArray(L"skills"), [](auto const& s) { return winrt::MonsterHunterWilds::SkillRank::Parse(s.GetObject()); }),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"defenseBonus")),
+            winrt::MonsterHunterWilds::JsonParser::ParseWeaponSpecials(json_object),
+            winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"sharpness", [](auto const& json_value) { return winrt::MonsterHunterWilds::Sharpness::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::Sharpness>(),
+            winrt::MonsterHunterWilds::JsonParser::TryParseNamedInt32Array(json_object, L"handicraft"),
+            winrt::MonsterHunterWilds::JsonParser::ParseSkillRanks(json_object.GetNamedArray(L"skills")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"defenseBonus"),
             winrt::MonsterHunterWilds::EnumMap::TryEldersealMap(json_object, L"elderseal"),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"affinity")),
-            ParseJsonArray(json_object.GetNamedArray(L"slots"), [](auto const& s) { return static_cast<int32_t>(s.GetNumber()); }),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"affinity"),
+            winrt::MonsterHunterWilds::JsonParser::ParseNamedInt32Array(json_object, L"slots"),
             winrt::MonsterHunterWilds::WeaponCrafting::Parse(json_object.GetNamedObject(L"crafting")),
-            TryParseNamedObject(json_object, L"series", [](auto const& json_object) { return winrt::MonsterHunterWilds::WeaponSeries::Parse(json_object); }),
+            winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"series", [](auto const& json_value) { return winrt::MonsterHunterWilds::WeaponSeries::Parse(json_value.GetObject()); }).as<winrt::MonsterHunterWilds::WeaponSeries>(),
             winrt::MonsterHunterWilds::EnumMap::ChargeBladePhialMap(json_object.GetNamedString(L"phial"))
         };
     }

@@ -41,6 +41,7 @@ namespace MonsterHunterWilds
     runtimeclass SkillRank
     {
         static SkillRank Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<SkillRank> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
         static Windows.Foundation.Collections.IVector<SkillRank> TryParse(Windows.Data.Json.JsonObject json_object, String key);
 
 		SkillRank(Int32 id, String name, String description, Int32 level);
@@ -54,6 +55,7 @@ namespace MonsterHunterWilds
     runtimeclass Skill
     {
         static Skill Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Skill> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
 		Skill(Int32 id, String name, String description, Windows.Foundation.Collections.IVector<SkillRank> ranks, Windows.Foundation.IReference<SkillKind> kind, SkillIcon icon);
 
@@ -66,15 +68,31 @@ namespace MonsterHunterWilds
     }
 
     // Items
+    // ItemRecipe JSON Object에서는 아래 것을 사용
+    runtimeclass MiniItem
+    {
+        static MiniItem Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MiniItem> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        MiniItem(
+            Int32 id,
+            String name
+        );
+
+        Int32 Id{ get; };
+        String Name{ get; };
+    }
+
     runtimeclass ItemRecipe
     {
         static ItemRecipe Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<ItemRecipe> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
-        ItemRecipe(Int32 id, Int32 amount, Windows.Foundation.Collections.IVector<Item> inputs);
+        ItemRecipe(Int32 id, Int32 amount, Windows.Foundation.Collections.IVector<MiniItem> inputs);
 
 		Int32 Id{ get; };
 	    Int32 Amount{ get; };
-		Windows.Foundation.Collections.IVector<Item> Inputs{ get; };
+		Windows.Foundation.Collections.IVector<MiniItem> Inputs{ get; };
     }
 
     enum Color
@@ -187,6 +205,7 @@ namespace MonsterHunterWilds
     runtimeclass Item
     {
         static Item Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Item> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         Item(Int32 id, Int32 game_id, String name, String description, Int32 rarity, Int32 carry_limit, Int32 the_value, Windows.Foundation.Collections.IVector<ItemRecipe> recipes, ItemIcon icon);
 
@@ -255,6 +274,7 @@ namespace MonsterHunterWilds
     runtimeclass Armor
     {
         static Armor Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Armor> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         Armor(
             Int32 id,
@@ -311,6 +331,7 @@ namespace MonsterHunterWilds
     runtimeclass ArmorSet
     {
         static ArmorSet Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<ArmorSet> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         ArmorSet(Int32 id, Int32 game_id, String name, Windows.Foundation.Collections.IVector<Armor> pieces, ArmorSetBonus bonus, ArmorSetBonus group_bonus);
 
@@ -337,6 +358,7 @@ namespace MonsterHunterWilds
     runtimeclass CraftingCost
     {
         static CraftingCost Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<CraftingCost> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         CraftingCost(Int32 quantity, Item item);
 
@@ -347,6 +369,7 @@ namespace MonsterHunterWilds
     runtimeclass CharmRankCrafting
     {
         static CharmRankCrafting Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<CharmRankCrafting> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         CharmRankCrafting(Boolean craftable, Int32 zenny_cost, Windows.Foundation.Collections.IVector<CraftingCost> materials);
 
@@ -358,6 +381,7 @@ namespace MonsterHunterWilds
     runtimeclass CharmRank
     {
         static CharmRank Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<CharmRank> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         CharmRank(Int32 id, String name, String description, Int32 level, Int32 rarity, Windows.Foundation.Collections.IVector<SkillRank> skills, CharmRankCrafting crafting);
 
@@ -373,6 +397,7 @@ namespace MonsterHunterWilds
     runtimeclass Charm
     {
         static Charm Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Charm> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         Charm(Int32 id, Int32 game_id, Windows.Foundation.Collections.IVector<CharmRank> ranks);
 
@@ -401,6 +426,7 @@ namespace MonsterHunterWilds
     runtimeclass Decoration
     {
         static Decoration Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Decoration> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
         Decoration(
             Int32 id,
@@ -541,12 +567,11 @@ namespace MonsterHunterWilds
 	};
 
     // WeaponCrafting JSON Object에서는 아래 것을 사용
-    [default_interface]
     runtimeclass MiniWeapon
     {
         static MiniWeapon Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MiniWeapon> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
-        MiniWeapon();
         MiniWeapon(
             Int32 id,
             String name
@@ -658,6 +683,7 @@ namespace MonsterHunterWilds
     runtimeclass HuntingHornSong
     {
         static HuntingHornSong Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<HuntingHornSong> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
 
 		HuntingHornSong(Int32 id, Int32 effect_id, Windows.Foundation.Collections.IVector<HuntingHornNote> sequence, String name);
 
@@ -1202,8 +1228,8 @@ namespace MonsterHunterWilds
         static WeaponSpecial ParseWeaponSpecial(Windows.Data.Json.IJsonValue json_value);
         static Windows.Foundation.Collections.IVector<WeaponSpecial> ParseWeaponSpecials(Windows.Data.Json.JsonObject json_object);
         static Weapon ParseWeapon(Windows.Data.Json.JsonObject json_object);
-
-        static Windows.Foundation.Collections.IVector<Armor> ParseArmors(Windows.Data.Json.JsonArray json_array);
+        static Windows.Foundation.Collections.IVector<Weapon> ParseWeapons(Windows.Data.Json.JsonArray json_array);
+        
         static Windows.Foundation.Collections.IVector<ArmorSetBonusRank> ParseArmorSetBonusRanks(Windows.Data.Json.JsonArray json_array);
         static Windows.Foundation.Collections.IVector<SkillRank> ParseSkillRanks(Windows.Data.Json.JsonArray json_array);
         static Windows.Foundation.Collections.IVector<BowCoating> ParseBowCoatings(Windows.Data.Json.JsonObject json_object);

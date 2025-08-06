@@ -4,8 +4,6 @@
 #include "Database.g.cpp"
 #endif
 
-#include "Util.h"
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -95,57 +93,50 @@ namespace winrt::MonsterHunterWilds::implementation
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor>> Database::GetArmorsAsync()
     {
-        auto json_object{ co_await GetArmorsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Armor::Parse(json.GetObject()); }) };
+        auto json_array{ co_await GetArmorsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::Armor::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSet>> Database::GetArmorSetsAsync()
     {
-        auto json_object{ co_await GetArmorSetsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json_value) { return winrt::MonsterHunterWilds::ArmorSet::Parse(json_value.GetObject()); }) };
+        auto json_array{ co_await GetArmorSetsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::ArmorSet::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Charm>> Database::GetCharmsAsync()
     {
-        auto json_object{ co_await GetCharmsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Charm::Parse(json.GetObject()); }) };
+        auto json_array{ co_await GetCharmsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::Charm::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Decoration>> Database::GetDecorationsAsync()
     {
-        auto json_object{ co_await GetDecorationsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Decoration::Parse(json.GetObject()); }) };
+        auto json_array{ co_await GetDecorationsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::Decoration::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item>> Database::GetItemsAsync()
     {
-        auto json_object{ co_await GetItemsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json) { return winrt::MonsterHunterWilds::Item::Parse(json.GetObject()); }) };
+        auto json_array{ co_await GetItemsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::Item::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()
     {
-        auto json_object{ co_await GetSkillsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json) { return Skill::Parse(json.GetObject()); }) };
+        auto json_array{ co_await GetSkillsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::Skill::ParseJsonArray(json_array);
     }
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon>> Database::GetWeaponsAsync()
     {
-        auto json_object{ co_await GetWeaponsJsonAsync() };
-        auto result{ ParseJsonArray(json_object, [](auto const& json_value) { return winrt::MonsterHunterWilds::JsonParser::ParseWeapon(json_value.GetObject()); }) };
+        auto json_array{ co_await GetWeaponsJsonAsync() };
 
-        co_return result;
+        co_return winrt::MonsterHunterWilds::JsonParser::ParseWeapons(json_array);
     }
 }

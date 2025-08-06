@@ -2,7 +2,7 @@
 #include "Bow.h"
 #include "Bow.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {

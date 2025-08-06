@@ -2,6 +2,8 @@
 #include "ArmorSet.h"
 #include "ArmorSet.g.cpp"
 
+import std;
+
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::ArmorSet ArmorSet::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
@@ -10,10 +12,19 @@ namespace winrt::MonsterHunterWilds::implementation
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"gameId"),
             json_object.GetNamedString(L"name"),
-            winrt::MonsterHunterWilds::JsonParser::ParseArmors(json_object.GetNamedArray(L"pieces")),
+            winrt::MonsterHunterWilds::Armor::ParseJsonArray(json_object.GetNamedArray(L"pieces")),
             winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"bonus", [](auto const& json_object) { return winrt::MonsterHunterWilds::ArmorSetBonus::Parse(json_object); }).as<winrt::MonsterHunterWilds::ArmorSetBonus>(),
             winrt::MonsterHunterWilds::ArmorSetBonus::TryParse(json_object, L"groupBonus")
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSet> ArmorSet::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     ArmorSet::ArmorSet(

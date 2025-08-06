@@ -2,21 +2,32 @@
 #include "Item.h"
 #include "Item.g.cpp"
 
+import std;
+
 namespace winrt::MonsterHunterWilds::implementation
 {
-    winrt::MonsterHunterWilds::Item Item::Parse(winrt::Windows::Data::Json::JsonObject const& json)
+    winrt::MonsterHunterWilds::Item Item::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json.GetNamedNumber(L"id")),
-            static_cast<int32_t>(json.GetNamedNumber(L"gameId")),
-            json.GetNamedString(L"name"),
-            json.GetNamedString(L"description"),
-            static_cast<int32_t>(json.GetNamedNumber(L"rarity")),
-            static_cast<int32_t>(json.GetNamedNumber(L"carryLimit")),
-            static_cast<int32_t>(json.GetNamedNumber(L"value")),
-            {},            // recipes »ý·«
-            winrt::MonsterHunterWilds::ItemIcon::Parse(json.GetNamedObject(L"icon"))
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"gameId"),
+            json_object.GetNamedString(L"name"),
+            json_object.GetNamedString(L"description"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"rarity"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"carryLimit"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"value"),
+            winrt::MonsterHunterWilds::ItemRecipe::ParseJsonArray(json_object.GetNamedArray(L"recipes")),
+            winrt::MonsterHunterWilds::ItemIcon::Parse(json_object.GetNamedObject(L"icon"))
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item> Item::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     Item::Item(

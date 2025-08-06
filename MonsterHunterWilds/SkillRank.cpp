@@ -2,29 +2,34 @@
 #include "SkillRank.h"
 #include "SkillRank.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::SkillRank SkillRank::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
-            TryGetNamedString(json_object, L"name"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
+            winrt::MonsterHunterWilds::JsonParser::TryGetNamedString(json_object, L"name"),
             json_object.GetNamedString(L"description"),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"level"))
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"level")
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> SkillRank::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> SkillRank::TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key)
     {
         if (json_object.HasKey(key))
         {
-            return winrt::single_threaded_vector(
-                json_object.GetNamedArray(key)
-                | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
-                | std::ranges::to<std::vector>()
-            );
+            return ParseJsonArray(json_object.GetNamedArray(key));
         }
 
         return nullptr;

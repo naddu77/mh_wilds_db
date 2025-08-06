@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct Decoration : DecorationT<Decoration>
     {
         static winrt::MonsterHunterWilds::Decoration Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Decoration> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         Decoration(int32_t id, int32_t game_id, hstring const& name, hstring const& description, int32_t slot, int32_t rarity, winrt::MonsterHunterWilds::DecorationKind const& kind, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, winrt::MonsterHunterWilds::DecorationIcon const& icon);
         

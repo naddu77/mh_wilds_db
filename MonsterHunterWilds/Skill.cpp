@@ -2,6 +2,8 @@
 #include "Skill.h"
 #include "Skill.g.cpp"
 
+import std;
+
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::Skill Skill::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
@@ -14,6 +16,15 @@ namespace winrt::MonsterHunterWilds::implementation
             json_object.HasKey(L"kind") ? winrt::MonsterHunterWilds::EnumMap::SkillKindMap(json_object.GetNamedString(L"kind")) : winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::SkillKind>{},
             winrt::MonsterHunterWilds::SkillIcon::TryParse(json_object, L"icon")
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill> Skill::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     Skill::Skill(

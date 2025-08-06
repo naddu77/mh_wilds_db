@@ -189,11 +189,11 @@ namespace winrt::MonsterHunterWilds::implementation
         throw winrt::hresult_invalid_argument{ std::format(L"Invalid Weapon Kind: {}", kind) };
     }
 
-    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor> JsonParser::ParseArmors(winrt::Windows::Data::Json::JsonArray const& json_array)
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon> JsonParser::ParseWeapons(winrt::Windows::Data::Json::JsonArray const& json_array)
     {
         return winrt::single_threaded_vector(
             json_array
-            | std::views::transform([](auto const& json_value) { return winrt::MonsterHunterWilds::Armor::Parse(json_value.GetObject()); })
+            | std::views::transform([](auto const& json_value) { return JsonParser::ParseWeapon(json_value.GetObject()); })
             | std::ranges::to<std::vector>()
         );
     }

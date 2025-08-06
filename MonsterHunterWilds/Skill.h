@@ -8,6 +8,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct Skill : SkillT<Skill>
     {
         static winrt::MonsterHunterWilds::Skill Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         Skill(
             int32_t id,

@@ -2,16 +2,14 @@
 #include "ArmorCrafting.h"
 #include "ArmorCrafting.g.cpp"
 
-#include "Util.h"
-
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::ArmorCrafting ArmorCrafting::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-               static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
-               static_cast<int32_t>(json_object.GetNamedNumber(L"zennyCost")),
-               ParseJsonArray(json_object.GetNamedArray(L"materials"), [](auto const& json_value) { return winrt::MonsterHunterWilds::CraftingCost::Parse(json_value.GetObject()); })
+               winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
+               winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"zennyCost"),
+               winrt::MonsterHunterWilds::CraftingCost::ParseJsonArray(json_object.GetNamedArray(L"materials"))
         };
     }
 

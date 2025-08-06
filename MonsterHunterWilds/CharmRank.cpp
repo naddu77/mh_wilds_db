@@ -2,23 +2,30 @@
 #include "CharmRank.h"
 #include "CharmRank.g.cpp"
 
-#include "CharmRankCrafting.h"
-
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::CharmRank CharmRank::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             json_object.GetNamedString(L"name"),
             json_object.GetNamedString(L"description"),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"level")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"rarity")),
-            ParseJsonArray(json_object.GetNamedArray(L"skills"), [](auto const& s) { return winrt::MonsterHunterWilds::SkillRank::Parse(s.GetObject()); }),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object,L"level"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"rarity"),
+            winrt::MonsterHunterWilds::SkillRank::ParseJsonArray(json_object.GetNamedArray(L"skills")),
             winrt::MonsterHunterWilds::CharmRankCrafting::Parse(json_object.GetNamedObject(L"crafting"))
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRank> CharmRank::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     CharmRank::CharmRank(int32_t id, hstring const& name, hstring const& description, int32_t level, int32_t rarity, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> const& skills, winrt::MonsterHunterWilds::CharmRankCrafting const& crafting)

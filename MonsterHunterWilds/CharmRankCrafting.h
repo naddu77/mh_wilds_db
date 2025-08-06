@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct CharmRankCrafting : CharmRankCraftingT<CharmRankCrafting>
     {
         static winrt::MonsterHunterWilds::CharmRankCrafting Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRankCrafting> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         CharmRankCrafting(bool craftable, int32_t zenny_cost, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CraftingCost> const& materials);
 

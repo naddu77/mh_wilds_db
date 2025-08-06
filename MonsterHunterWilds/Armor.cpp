@@ -2,26 +2,35 @@
 #include "Armor.h"
 #include "Armor.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::Armor Armor::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             json_object.GetNamedString(L"name"),
             json_object.GetNamedString(L"description"),
             winrt::MonsterHunterWilds::EnumMap::ArmorKindMap(json_object.GetNamedString(L"kind")),
             winrt::MonsterHunterWilds::EnumMap::RankMap(json_object.GetNamedString(L"rank")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"rarity")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"rarity"),
             winrt::MonsterHunterWilds::ArmorDefense::Parse(json_object.GetNamedObject(L"defense")),
             winrt::MonsterHunterWilds::ArmorResistances::Parse(json_object.GetNamedObject(L"resistances")),
-            ParseJsonArray(json_object.GetNamedArray(L"slots"), [](auto const& slot) { return static_cast<int32_t>(slot.GetNumber()); }),
-            ParseJsonArray(json_object.GetNamedArray(L"skills"), [](auto const& s) { return winrt::MonsterHunterWilds::SkillRank::Parse(s.GetObject()); }),
+            winrt::MonsterHunterWilds::JsonParser::ParseNamedInt32Array(json_object, L"slots"),
+            winrt::MonsterHunterWilds::SkillRank::ParseJsonArray(json_object.GetNamedArray(L"skills")),
             winrt::MonsterHunterWilds::MiniArmorSet::Parse(json_object.GetNamedObject(L"armorSet")),
             winrt::MonsterHunterWilds::ArmorCrafting::Parse(json_object.GetNamedObject(L"crafting"))
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor> Armor::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     Armor::Armor(

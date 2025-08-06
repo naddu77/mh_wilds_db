@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct SkillRank : SkillRankT<SkillRank>
     {
         static winrt::MonsterHunterWilds::SkillRank Parse(winrt::Windows::Data::Json::JsonObject const& json);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> TryParse(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key);
 
         SkillRank(int32_t id, hstring const& name, hstring const& description, int32_t level);

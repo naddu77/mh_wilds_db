@@ -148,13 +148,15 @@ int main()
 
 	//std::wcout << std::format(L"Database Version: {}\n", winrt::MonsterHunterWilds::Database::GetVersionAsync().get());
 
-    //TestArmors().get();
-    //TestArmorSets().get();
-    //TestCharms().get();
-    //TestDecorations().get();
-    //TestItems().get();
-    //TestSkills().get();
+    TestArmors().get();
+    TestArmorSets().get();
+    TestCharms().get();
+    TestDecorations().get();
+    TestItems().get();
+    TestSkills().get();
     TestWeapons().get();
 
 	//__debugbreak();
+
+    return 0;
 }

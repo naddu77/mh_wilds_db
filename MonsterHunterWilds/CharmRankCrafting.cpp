@@ -2,7 +2,7 @@
 #include "CharmRankCrafting.h"
 #include "CharmRankCrafting.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
@@ -10,9 +10,18 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         return {
 			json_object.GetNamedBoolean(L"craftable"),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"zennyCost")),
-            ParseJsonArray(json_object.GetNamedArray(L"materials"), [](auto const& m) { return winrt::MonsterHunterWilds::CraftingCost::Parse(m.GetObject()); })
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"zennyCost"),
+            winrt::MonsterHunterWilds::CraftingCost::ParseJsonArray(json_object.GetNamedArray(L"materials"))
         };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRankCrafting> CharmRankCrafting::ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return Parse(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+        );
     }
 
     CharmRankCrafting::CharmRankCrafting(bool craftable, int32_t zenny_cost, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CraftingCost> const& materials)

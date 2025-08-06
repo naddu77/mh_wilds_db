@@ -2,23 +2,23 @@
 #include "WeaponCrafting.h"
 #include "WeaponCrafting.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::WeaponCrafting WeaponCrafting::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             json_object.GetNamedBoolean(L"craftable"),
-            TryParseNamedObject(json_object, L"previous", [](auto const& json_object) { return winrt::MonsterHunterWilds::MiniWeapon::Parse(json_object); }),
-            ParseJsonArray(json_object.GetNamedArray(L"branches"), [](auto const& b) { return winrt::MonsterHunterWilds::MiniWeapon::Parse(b.GetObject()); }),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"craftingZennyCost")),
-            ParseJsonArray(json_object.GetNamedArray(L"craftingMaterials"), [](auto const& m) { return winrt::MonsterHunterWilds::CraftingCost::Parse(m.GetObject()); }),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"upgradeZennyCost")),
-            ParseJsonArray(json_object.GetNamedArray(L"upgradeMaterials"), [](auto const& m) { return winrt::MonsterHunterWilds::CraftingCost::Parse(m.GetObject()); }),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"row")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"column"))
+            winrt::MonsterHunterWilds::JsonParser::TryParseNamedObject(json_object, L"previous", [](auto const& json_object) { return winrt::MonsterHunterWilds::MiniWeapon::Parse(json_object); }).as< winrt::MonsterHunterWilds::MiniWeapon>(),
+            winrt::MonsterHunterWilds::MiniWeapon::ParseJsonArray(json_object.GetNamedArray(L"branches")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"craftingZennyCost"),
+            winrt::MonsterHunterWilds::CraftingCost::ParseJsonArray(json_object.GetNamedArray(L"craftingMaterials")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"upgradeZennyCost"),
+            winrt::MonsterHunterWilds::CraftingCost::ParseJsonArray(json_object.GetNamedArray(L"upgradeMaterials")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"row"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"column")
         };
     }
 

@@ -2,7 +2,7 @@
 #include "DecorationIcon.h"
 #include "DecorationIcon.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
@@ -10,7 +10,7 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         return {
             winrt::MonsterHunterWilds::EnumMap::ColorMap(json_object.GetNamedString(L"color")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"colorId"))
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"colorId")
         };
     }
 

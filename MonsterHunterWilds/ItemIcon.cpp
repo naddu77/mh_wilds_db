@@ -2,17 +2,17 @@
 #include "ItemIcon.h"
 #include "ItemIcon.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::ItemIcon ItemIcon::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
             winrt::MonsterHunterWilds::EnumMap::ItemIconKindMap(json_object.GetNamedString(L"kind")),
-            TryGetNamedNumber<int32_t>(json_object, L"colorId"),
-            winrt::MonsterHunterWilds::EnumMap::ColorMap(TryGetNamedString(json_object, L"color"))
+            winrt::MonsterHunterWilds::JsonParser::TryGetNamedInt32(json_object, L"colorId"),
+            winrt::MonsterHunterWilds::EnumMap::ColorMap(json_object.GetNamedString(L"color"))
         };
     }
 

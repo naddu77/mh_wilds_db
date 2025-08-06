@@ -22,8 +22,8 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::MonsterHunterWilds::WeaponSpecial ParseWeaponSpecial(winrt::Windows::Data::Json::IJsonValue const& json_value);
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> ParseWeaponSpecials(winrt::Windows::Data::Json::JsonObject const& json_object);
         static winrt::MonsterHunterWilds::Weapon ParseWeapon(winrt::Windows::Data::Json::JsonObject const& json_object);
-
-        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor> ParseArmors(winrt::Windows::Data::Json::JsonArray const& json_array);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon> ParseWeapons(winrt::Windows::Data::Json::JsonArray const& json_array);
+        
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::ArmorSetBonusRank> ParseArmorSetBonusRanks(winrt::Windows::Data::Json::JsonArray const& json_array);
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::SkillRank> ParseSkillRanks(winrt::Windows::Data::Json::JsonArray const& json_array);
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::BowCoating> ParseBowCoatings(winrt::Windows::Data::Json::JsonObject const& json_object);

@@ -2,17 +2,21 @@
 #include "HuntingHornMelody.h"
 #include "HuntingHornMelody.g.cpp"
 
-#include "Util.h"
+import std;
 
 namespace winrt::MonsterHunterWilds::implementation
 {
     winrt::MonsterHunterWilds::HuntingHornMelody HuntingHornMelody::Parse(winrt::Windows::Data::Json::JsonObject const& json_object)
     {
         return {
-            static_cast<int32_t>(json_object.GetNamedNumber(L"id")),
-            static_cast<int32_t>(json_object.GetNamedNumber(L"gameId")),
-            ParseJsonArray(json_object.GetNamedArray(L"notes"), [](auto const& json_value) { return winrt::MonsterHunterWilds::EnumMap::HuntingHornNoteMap(json_value.GetString()); }),
-            ParseJsonArray(json_object.GetNamedArray(L"songs"), [](auto const& json_value) { return winrt::MonsterHunterWilds::HuntingHornSong::Parse(json_value.GetObject()); })
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"id"),
+            winrt::MonsterHunterWilds::JsonParser::GetNamedInt32(json_object, L"gameId"),
+            winrt::single_threaded_vector(
+                json_object.GetNamedArray(L"notes")
+                | std::views::transform([](auto const& json_value) { return winrt::MonsterHunterWilds::EnumMap::HuntingHornNoteMap(json_value.GetString()); })
+                | std::ranges::to<std::vector>()
+            ),
+            winrt::MonsterHunterWilds::HuntingHornSong::ParseJsonArray(json_object.GetNamedArray(L"songs"))
         };
     }
 

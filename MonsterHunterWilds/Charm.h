@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct Charm : CharmT<Charm>
     {
         static winrt::MonsterHunterWilds::Charm Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Charm> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         Charm(int32_t id, int32_t game_id, winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::CharmRank> const& ranks);
 

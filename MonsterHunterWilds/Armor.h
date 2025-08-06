@@ -6,6 +6,7 @@ namespace winrt::MonsterHunterWilds::implementation
     struct Armor : ArmorT<Armor>
     {
         static winrt::MonsterHunterWilds::Armor Parse(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor> ParseJsonArray(winrt::Windows::Data::Json::JsonArray const& json_array);
 
         Armor(
             int32_t id,
