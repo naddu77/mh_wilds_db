@@ -452,6 +452,401 @@ namespace MonsterHunterWilds
         DecorationIcon Icon{ get; };
     }
 
+    // Locations
+    enum Risk
+    {
+        Safe,
+        Insecure,
+        Dangerous
+    };
+
+    runtimeclass Camp
+    {
+        static Camp Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Camp> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        Camp(
+            Int32 id,
+            String name,
+            Int32 zone,
+            Int32 floor,
+            Risk risk,
+            Position position
+        );
+
+        Int32 Id{ get; };
+        String Name{ get; };
+        Int32 Zone{ get; };
+        Int32 Floor{ get; };
+        Risk Risk{ get; };
+        Position Position{ get; };
+    }
+
+    runtimeclass Location
+    {
+        static Location Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Location> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        Location(
+            Int32 id,
+            Int32 gameId,
+            String name,
+            Int32 zoneCount,
+            Windows.Foundation.Collections.IVector<Camp> camps
+        );
+
+        Int32 Id{ get; };
+        Int32 GameId{ get; };
+        String Name{ get; };
+        Int32 ZoneCount{ get; };
+        Windows.Foundation.Collections.IVector<Camp> Camps{ get; };
+    }
+
+    // Monsters
+    enum MonsterKind
+    {
+        Small,
+        Large
+    };
+
+    enum Species
+    {
+        FlyingWyvern,
+        Fish,
+        Herbivore,
+        Lynian,
+        Neopteron,
+        Carapaceon,
+        FangedBeast,
+        BirdWyvern,
+        PiscineWyvern,
+        Leviathan,
+        BruteWyvern,
+        FangedWyvern,
+        Amphibian,
+        Temnoceran,
+        SnakeWyvern,
+        ElderDragon,
+        Cephalopod,
+        Construct,
+        Wingdrake,
+        DemiElder
+    };
+
+    runtimeclass MonsterSize
+    {
+        static MonsterSize Parse(Windows.Data.Json.JsonObject json_object);
+
+        MonsterSize(
+            Double base,
+            Double mini,
+            Double silver,
+            Double gold
+        );
+
+        Double Base{ get; };
+        Double Mini{ get; };
+        Double Siver{ get; };
+        Double Gold{ get; };
+    }
+
+    enum ResistanceKind
+    {
+        Element,
+        Status,
+        Effect
+	};
+
+    interface MonsterResistance
+    {
+        Int32 Id{ get; };
+        String Condition{ get; };
+        ResistanceKind Kind{ get; };
+    };
+
+    runtimeclass ElementResistance : MonsterResistance
+    {
+        static MonsterResistance Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterResistance> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        ElementResistance(Int32 id, String condition, Element element);
+
+        Element Element{ get; };
+    }
+
+    runtimeclass StatusResistance : MonsterResistance
+    {
+        static MonsterResistance Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterResistance> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        StatusResistance(Int32 id, String condition, Status status);
+
+        Status Status{ get; };
+    }
+
+    runtimeclass EffectResistance : MonsterResistance
+    {
+        static MonsterResistance Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterResistance> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        EffectResistance(Int32 id, String condition, Effect effect);
+
+        Effect Effect{ get; };
+    }
+
+    enum WeaknessKind
+    {
+        Element,
+        Status,
+        Effect
+    };
+
+    interface MonsterWeakness
+    {
+		Int32 Id{ get; };
+        Int32 Level{ get; };
+        String Condition{ get; };
+        WeaknessKind Kind{ get; };
+    }
+
+    runtimeclass ElementWeakness : MonsterWeakness
+    {
+        static MonsterWeakness Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterWeakness> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        ElementWeakness(Int32 id, Int32 level, String condition, Element element);
+
+        Element Element{ get; };
+    }
+
+    runtimeclass StatusWeakness : MonsterWeakness
+    {
+        static MonsterWeakness Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterWeakness> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        StatusWeakness(Int32 id, Int32 level, String condition, Status status);
+
+        Status Status{ get; };
+    }
+
+    runtimeclass EffectWeakness : MonsterWeakness
+    {
+        static MonsterWeakness Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterWeakness> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        EffectWeakness(Int32 id, Int32 level, String condition, Effect effect);
+
+		Effect Effect{ get; };
+	}
+
+    enum MonsterPartKind
+    {
+		Neck,
+        LeftFrontLeg,
+        Head,
+        RightWingArmWear,
+        LeftWingArmWear,
+        HeadWear,
+        LeftWingArmHide,
+        RightWingArmHide,
+        LeftWingArm,
+        HeadHide,
+        RightWingArm,
+        LeftHindLeg,
+        RightHindLeg,
+        Torso,
+        RightFrontLeg,
+        Tail,
+        TailHair,
+        LeftWing,
+        RightLeg,
+        Hide,
+        RightWing,
+        LeftLeg,
+        RightNail,
+        Petal,
+        LeftNail,
+        PoisonousThorn,
+        Mantle,
+        Stomach,
+        LeftWingLegs,
+        Antennae,
+        RightWingLeg,
+        Back,
+        RightWingBlade,
+        LeftWingBlade,
+        Ass,
+        Tongue,
+        DorsalFin,
+        Nose,
+        TailTip,
+        RightFrontArm,
+        LeftHindArm,
+        LeftSideArm,
+        Umbrella,
+        Mouth,
+        Tentacle,
+        RightSideArm,
+        LeftFrontArm,
+        RightHindArm,
+        WaterfilmTail,
+        WaterfilmLeftBody,
+        WaterfilmLeftFrontLeg,
+        WaterfilmRightHead,
+        WaterfilmRightFrontLeg,
+        WaterfilmRightTail,
+        WaterfilmLeftTail,
+        WaterfilmLeftHead,
+        WaterfilmRightBody,
+        FrozenBigcoreAfter,
+        FrozenCoreWaist,
+        FrozenBigcoreBefore,
+        Chest,
+        HindLegs,
+        FrontLegs
+	};
+
+    runtimeclass MonsterPart
+    {
+        static MonsterPart Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterPart> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        MonsterPart(
+            Int32 id,
+            MonsterPartKind kind,
+            Windows.Foundation.IReference<Int32> health,
+            Windows.Foundation.IReference<KinsectEssence> kinsect_essence,
+            DamageMultipliers multipliers
+        );
+
+        Int32 Id{ get; };
+        MonsterPartKind Kind{ get; };
+        Windows.Foundation.IReference<Int32> Health{ get; };
+        Windows.Foundation.IReference<KinsectEssence> KinsectEssence{ get; };
+        DamageMultipliers Multipliers{ get; };
+    }
+
+    enum RewardConditionKind
+    {
+        Carve,
+        CarveSevered,
+        EndemicCapture,
+        TargetReward,
+        BrokenPart,
+        WoundDestroyed,
+        CarveRotten,
+        SlingerGather,
+        CarveRottenSevered,
+        TemperedWoundDestroyed,
+        CarveCrystallized
+    };
+
+    runtimeclass RewardCondition
+    {
+        static RewardCondition Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<RewardCondition> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        RewardCondition(
+            RewardConditionKind kind,
+            Rank rank,
+            Int32 quantity,
+            Double chance,
+            String part
+        );
+
+        RewardConditionKind Kind{ get; };
+        Rank Rank{ get; };
+        Int32 Quantity{ get; };
+        Double Chance{ get; };
+        String Part{ get; };
+    }
+
+    runtimeclass MonsterReward
+    {
+        static MonsterReward Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterReward> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        MonsterReward(
+            Item item,
+            Windows.Foundation.Collections.IVector<RewardCondition> conditions
+        );
+
+        Item Item{ get; };
+        Windows.Foundation.Collections.IVector<RewardCondition> Conditions{ get; };
+    }
+
+    runtimeclass Monster
+    {
+        static Monster Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<Monster> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        Monster(
+            Int32 id,
+            Int32 game_id,
+            MonsterKind kind,
+            Species species,
+            String name,
+            MonsterSize size,
+            String description,
+            String features,
+            String tips,
+            Int32 base_health,
+            Windows.Foundation.Collections.IVector<Location> locations,
+            Windows.Foundation.Collections.IVector<MonsterResistance> resistances,
+            Windows.Foundation.Collections.IVector<MonsterWeakness> weaknesses,
+            Windows.Foundation.Collections.IVector<MonsterReward> rewards,
+            Windows.Foundation.Collections.IVector<MonsterPart> parts
+        );
+
+        Int32 Id{ get; };
+        Int32 GameId{ get; };
+        MonsterKind Kind{ get; };
+        Species Species{ get; };
+        String Name{ get; };
+        MonsterSize Size{ get; };
+        String Description{ get; };
+        String Features{ get; };
+        String Tips{ get; };
+        Int32 BaseHealth{ get; };
+        Windows.Foundation.Collections.IVector<Location> Locations{ get; };
+        Windows.Foundation.Collections.IVector<MonsterResistance> Resistances{ get; };
+        Windows.Foundation.Collections.IVector<MonsterWeakness> Weaknesses{ get; };
+        Windows.Foundation.Collections.IVector<MonsterReward> Rewards{ get; };
+        Windows.Foundation.Collections.IVector<MonsterPart> Parts{ get; };
+    }
+
+    // Motion Values
+    enum DamageKind
+    {
+        Servering,
+        Blunt,
+        Projectile
+    };
+
+    runtimeclass MotionValue
+    {
+        static MotionValue Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MotionValue> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        MotionValue(
+            Int32 id,
+            String name,
+            WeaponKind weapon,
+            DamageKind damage,
+            Int32 stun,
+            Int32 exhaust,
+            Windows.Foundation.Collections.IVector<Int32> hits
+        );
+
+        Int32 Id{ get; };
+        String Name{ get; };
+        WeaponKind Weapon{ get; };
+        DamageKind Damage{ get; };
+        Int32 Stun{ get; };
+        Int32 Exhaust{ get; };
+        Windows.Foundation.Collections.IVector<Int32> Hits{ get; };
+    }
+
     // Weapons
     [default_interface]
     runtimeclass Sharpness
@@ -1191,6 +1586,62 @@ namespace MonsterHunterWilds
         );
     }
 
+    // Data Types
+    runtimeclass Position
+    {
+        static Position Parse(Windows.Data.Json.JsonObject json_object);
+        
+        Position(Double x, Double y, Double z);
+
+        Double X{ get; };
+        Double Y{ get; };
+        Double Z{ get; };
+    }
+
+    enum Effect
+    {
+        Noise,
+        Flash,
+        Stun,
+        Exhaust
+    };
+
+    enum KinsectEssence
+    {
+        White,
+        Orange,
+        Red,
+        Green
+    };
+
+    runtimeclass DamageMultipliers
+    {
+        static DamageMultipliers Parse(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<DamageMultipliers> ParseJsonArray(Windows.Data.Json.JsonArray json_array);
+
+        DamageMultipliers(
+            Double slash,
+            Double blunt,
+            Double pierce,
+            Double fire,
+            Double water,
+            Double thunder,
+            Double ice,
+            Double dragon,
+            Double stun
+        );
+
+        Double Slash{ get; };
+        Double Blunt{ get; };
+        Double Pierce{ get; };
+        Double Fire{ get; };
+        Double Water{ get; };
+        Double Thunder{ get; };
+        Double Ice{ get; };
+        Double Dragon{ get; };
+        Double Stun{ get; };
+	}
+
     // Database Urls
     [default_interface]
     runtimeclass Api
@@ -1206,6 +1657,9 @@ namespace MonsterHunterWilds
         String CharmsUrl();
         String DecorationsUrl();
         String ItemsUrl();
+		String LocationsUrl();
+		String MonstersUrl();
+        String MotionValuesUrl();
         String SkillsUrl();
         String WeaponsUrl();
     }
@@ -1232,6 +1686,10 @@ namespace MonsterHunterWilds
         static Windows.Foundation.Collections.IVector<WeaponSpecial> ParseWeaponSpecials(Windows.Data.Json.JsonObject json_object);
         static Weapon ParseWeapon(Windows.Data.Json.JsonObject json_object);
         static Windows.Foundation.Collections.IVector<Weapon> ParseWeapons(Windows.Data.Json.JsonArray json_array);
+		static MonsterResistance ParseMonsterResistance(Windows.Data.Json.JsonObject json_object);
+		static Windows.Foundation.Collections.IVector<MonsterResistance> ParseMonsterResistances(Windows.Data.Json.JsonArray json_array);
+		static MonsterWeakness ParseMonsterWeakness(Windows.Data.Json.JsonObject json_object);
+        static Windows.Foundation.Collections.IVector<MonsterWeakness> ParseMonsterWeaknesses(Windows.Data.Json.JsonArray json_array);        
     }
 
     [default_interface]
@@ -1248,6 +1706,9 @@ namespace MonsterHunterWilds
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetCharmsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetDecorationsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetItemsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetLocationsJsonAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetMonstersJsonAsync();
+		Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetMotionValuesJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetSkillsJsonAsync();
         Windows.Foundation.IAsyncOperation<Windows.Data.Json.JsonArray> GetWeaponsJsonAsync();
 
@@ -1256,7 +1717,10 @@ namespace MonsterHunterWilds
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Charm> > GetCharmsAsync();
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Decoration> > GetDecorationsAsync();
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Item> > GetItemsAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Location> > GetLocationsAsync();
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Monster> > GetMonstersAsync();
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Skill> > GetSkillsAsync();
+		Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<MotionValue> > GetMotionValuesAsync();
         Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<Weapon> > GetWeaponsAsync();
     }
 
@@ -1268,6 +1732,7 @@ namespace MonsterHunterWilds
         static SkillIconKind SkillIconKindMap(String str);
         static Element ElementMap(String str);
         static Status StatusMap(String str);
+		static Effect EffectMap(String str);
         static ArmorKind ArmorKindMap(String str);
         static Rank RankMap(String str);
         static DecorationKind DecorationKindMap(String str);
@@ -1283,5 +1748,13 @@ namespace MonsterHunterWilds
         static BowCoating BowCoatingMap(String str);
         static GunlanceShell GunlanceShellMap(String str);
         static LightBowgunSpecialAmmo LightBowgunSpecialAmmoMap(String str);
+		static Risk RiskMap(String str);
+		static MonsterKind MonsterKindMap(String str);
+		static Species SpeciesMap(String str);
+		static RewardConditionKind RewardConditionKindMap(String str);
+		static MonsterPartKind MonsterPartKindMap(String str);
+        static KinsectEssence KinsectEssenceMap(String str);
+		static Windows.Foundation.IReference<KinsectEssence> TryKinsectEssenceMap(Windows.Data.Json.JsonObject json_object, String key);
+		static DamageKind DamageKindMap(String str);
     }
 }

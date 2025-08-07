@@ -16,6 +16,9 @@ namespace winrt::MonsterHunterWilds::implementation
         hstring CharmsUrl();
         hstring DecorationsUrl();
         hstring ItemsUrl();
+		hstring LocationsUrl();
+		hstring MonstersUrl();
+		hstring MotionValuesUrl();
         hstring SkillsUrl();
         hstring WeaponsUrl();
 

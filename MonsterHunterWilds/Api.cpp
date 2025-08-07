@@ -50,6 +50,21 @@ namespace winrt::MonsterHunterWilds::implementation
         return std::format(L"{}/{}/items", base_url_, locale_).c_str();
     }
 
+    hstring Api::LocationsUrl()
+    {
+        return std::format(L"{}/{}/locations", base_url_, locale_).c_str();
+	}
+
+    hstring Api::MonstersUrl()
+    {
+        return std::format(L"{}/{}/monsters", base_url_, locale_).c_str();
+	}
+
+    hstring Api::MotionValuesUrl()
+    {
+        return std::format(L"{}/{}/motion-values", base_url_, locale_).c_str();
+	}
+
     hstring Api::SkillsUrl()
     {
         return std::format(L"{}/{}/skills", base_url_, locale_).c_str();

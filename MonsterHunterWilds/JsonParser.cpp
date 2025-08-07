@@ -197,4 +197,62 @@ namespace winrt::MonsterHunterWilds::implementation
             | std::ranges::to<std::vector>()
         );
     }
+
+    winrt::MonsterHunterWilds::MonsterResistance JsonParser::ParseMonsterResistance(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        auto kind{ json_object.GetNamedString(L"kind") };
+
+        if (kind == L"effect")
+        {
+            return winrt::MonsterHunterWilds::EffectResistance::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterResistance>();
+        }
+        else if (kind == L"element")
+        {
+            return winrt::MonsterHunterWilds::ElementResistance::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterResistance>();
+        }
+        else if (kind == L"status")
+        {
+            return winrt::MonsterHunterWilds::StatusResistance::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterResistance>();
+        }
+
+		throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", kind) };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MonsterResistance> JsonParser::ParseMonsterResistances(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return JsonParser::ParseMonsterResistance(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+		);
+    }
+
+    winrt::MonsterHunterWilds::MonsterWeakness JsonParser::ParseMonsterWeakness(winrt::Windows::Data::Json::JsonObject const& json_object)
+    {
+        auto kind{ json_object.GetNamedString(L"kind") };
+
+        if (kind == L"effect")
+        {
+            return winrt::MonsterHunterWilds::EffectWeakness::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterWeakness>();
+        }
+        else if (kind == L"element")
+        {
+            return winrt::MonsterHunterWilds::ElementWeakness::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterWeakness>();
+        }
+        else if (kind == L"status")
+        {
+            return winrt::MonsterHunterWilds::StatusWeakness::Parse(json_object).as<winrt::MonsterHunterWilds::MonsterWeakness>();
+        }
+
+		throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", kind) };
+    }
+
+    winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MonsterWeakness> JsonParser::ParseMonsterWeaknesses(winrt::Windows::Data::Json::JsonArray const& json_array)
+    {
+        return winrt::single_threaded_vector(
+            json_array
+            | std::views::transform([](auto const& json_value) { return JsonParser::ParseMonsterWeakness(json_value.GetObject()); })
+            | std::ranges::to<std::vector>()
+		);
+    }
 }

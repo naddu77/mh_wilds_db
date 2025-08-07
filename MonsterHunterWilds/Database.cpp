@@ -80,6 +80,21 @@ namespace winrt::MonsterHunterWilds::implementation
         co_return co_await GetJsonArrayAsync(api.ItemsUrl());
     }
 
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetLocationsJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.LocationsUrl());
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetMonstersJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.MonstersUrl());
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetMotionValuesJsonAsync()
+    {
+        co_return co_await GetJsonArrayAsync(api.MotionValuesUrl());
+	}
+
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> Database::GetSkillsJsonAsync()
     {
         co_return co_await GetJsonArrayAsync(api.SkillsUrl());
@@ -89,7 +104,6 @@ namespace winrt::MonsterHunterWilds::implementation
     {
         co_return co_await GetJsonArrayAsync(api.WeaponsUrl());
     }
-
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Armor>> Database::GetArmorsAsync()
     {
@@ -125,6 +139,27 @@ namespace winrt::MonsterHunterWilds::implementation
 
         co_return winrt::MonsterHunterWilds::Item::ParseJsonArray(json_array);
     }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Location>> Database::GetLocationsAsync()
+    {
+        auto json_array{ co_await GetLocationsJsonAsync() };
+
+        co_return winrt::MonsterHunterWilds::Location::ParseJsonArray(json_array);
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Monster>> Database::GetMonstersAsync()
+    {
+        auto json_array{ co_await GetMonstersJsonAsync() };
+
+        co_return winrt::MonsterHunterWilds::Monster::ParseJsonArray(json_array);
+    }
+
+    winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MotionValue>> Database::GetMotionValuesAsync()
+    {
+        auto json_array{ co_await GetMotionValuesJsonAsync() };
+
+        co_return winrt::MonsterHunterWilds::MotionValue::ParseJsonArray(json_array);
+	}
 
     winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> Database::GetSkillsAsync()
     {

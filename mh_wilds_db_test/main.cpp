@@ -102,6 +102,42 @@ winrt::Windows::Foundation::IAsyncAction TestItems()
     }
 }
 
+winrt::Windows::Foundation::IAsyncAction TestLocations()
+{
+    winrt::MonsterHunterWilds::Database db;
+    auto locations{ co_await db.GetLocationsAsync() };
+
+    for (auto const& location : locations)
+    {
+        std::wcout << std::format(L"Location ID: {}, Name: {}\n",
+            location.Id(), location.Name());
+    }
+}
+
+winrt::Windows::Foundation::IAsyncAction TestMonsters()
+{
+    winrt::MonsterHunterWilds::Database db;
+    auto monsters{ co_await db.GetMonstersAsync() };
+
+    for (auto const& monster : monsters)
+    {
+        std::wcout << std::format(L"Monster ID: {}, Name: {}, Kind: {}, Description: {}\n",
+            monster.Id(), monster.Name(), std::to_underlying(monster.Kind()), monster.Description());
+    }
+}
+
+winrt::Windows::Foundation::IAsyncAction TestMotionValues()
+{
+    winrt::MonsterHunterWilds::Database db;
+    auto motion_values{ co_await db.GetMotionValuesAsync() };
+
+    for (auto const& motion_value : motion_values)
+    {
+        std::wcout << std::format(L"Motion ID: {}, Name: {}, Stun: {}, Exhaust: {}, Hits: {}\n",
+            motion_value.Id(), motion_value.Name(), motion_value.Stun(), motion_value.Exhaust(), motion_value.Hits());
+    }
+}
+
 winrt::Windows::Foundation::IAsyncAction TestSkills()
 {
     winrt::MonsterHunterWilds::Database db;
@@ -148,13 +184,16 @@ int main()
 
 	//std::wcout << std::format(L"Database Version: {}\n", winrt::MonsterHunterWilds::Database::GetVersionAsync().get());
 
-    TestArmors().get();
-    TestArmorSets().get();
-    TestCharms().get();
-    TestDecorations().get();
-    TestItems().get();
-    TestSkills().get();
-    TestWeapons().get();
+    //TestArmors().get();
+    //TestArmorSets().get();
+    //TestCharms().get();
+    //TestDecorations().get();
+    //TestItems().get();
+    //TestLocations().get();
+    //TestMonsters().get();
+    TestMotionValues().get();
+    //TestSkills().get();
+    //TestWeapons().get();
 
 	//__debugbreak();
 

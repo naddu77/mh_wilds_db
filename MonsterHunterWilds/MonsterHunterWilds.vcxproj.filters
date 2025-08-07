@@ -65,6 +65,22 @@
     <ClCompile Include="LongSword.cpp" />
     <ClCompile Include="JsonParser.cpp" />
     <ClCompile Include="MiniItem.cpp" />
+    <ClCompile Include="Camp.cpp" />
+    <ClCompile Include="DamageMultipliers.cpp" />
+    <ClCompile Include="EffectResistance.cpp" />
+    <ClCompile Include="EffectWeakness.cpp" />
+    <ClCompile Include="ElementResistance.cpp" />
+    <ClCompile Include="ElementWeakness.cpp" />
+    <ClCompile Include="Location.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterPart.cpp" />
+    <ClCompile Include="MonsterReward.cpp" />
+    <ClCompile Include="MonsterSize.cpp" />
+    <ClCompile Include="MotionValue.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="RewardCondition.cpp" />
+    <ClCompile Include="StatusResistance.cpp" />
+    <ClCompile Include="StatusWeakness.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -120,6 +136,22 @@
     <ClInclude Include="LongSword.h" />
     <ClInclude Include="JsonParser.h" />
     <ClInclude Include="MiniItem.h" />
+    <ClInclude Include="Camp.h" />
+    <ClInclude Include="DamageMultipliers.h" />
+    <ClInclude Include="EffectResistance.h" />
+    <ClInclude Include="EffectWeakness.h" />
+    <ClInclude Include="ElementResistance.h" />
+    <ClInclude Include="ElementWeakness.h" />
+    <ClInclude Include="Location.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterPart.h" />
+    <ClInclude Include="MonsterReward.h" />
+    <ClInclude Include="MonsterSize.h" />
+    <ClInclude Include="MotionValue.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="RewardCondition.h" />
+    <ClInclude Include="StatusResistance.h" />
+    <ClInclude Include="StatusWeakness.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonsterHunterWilds.def" />

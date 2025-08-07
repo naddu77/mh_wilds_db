@@ -23,6 +23,10 @@ namespace winrt::MonsterHunterWilds::implementation
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::WeaponSpecial> ParseWeaponSpecials(winrt::Windows::Data::Json::JsonObject const& json_object);
         static winrt::MonsterHunterWilds::Weapon ParseWeapon(winrt::Windows::Data::Json::JsonObject const& json_object);
         static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon> ParseWeapons(winrt::Windows::Data::Json::JsonArray const& json_array);
+        static winrt::MonsterHunterWilds::MonsterResistance ParseMonsterResistance(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MonsterResistance> ParseMonsterResistances(winrt::Windows::Data::Json::JsonArray const& json_array);
+        static winrt::MonsterHunterWilds::MonsterWeakness ParseMonsterWeakness(winrt::Windows::Data::Json::JsonObject const& json_object);
+        static winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MonsterWeakness> ParseMonsterWeaknesses(winrt::Windows::Data::Json::JsonArray const& json_array);
     };
 }
 

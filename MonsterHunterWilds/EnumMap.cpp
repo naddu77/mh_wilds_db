@@ -202,6 +202,24 @@ namespace winrt::MonsterHunterWilds::implementation
         throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
     }
 
+    winrt::MonsterHunterWilds::Effect EnumMap::EffectMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::Effect> effect_map{
+            { L"noise", winrt::MonsterHunterWilds::Effect::Noise },
+            { L"flash", winrt::MonsterHunterWilds::Effect::Flash },
+            { L"stun", winrt::MonsterHunterWilds::Effect::Stun },
+            { L"exhaust", winrt::MonsterHunterWilds::Effect::Exhaust }
+        };
+
+        if (auto found{ effect_map.find(str) };
+            found != std::end(effect_map))
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+	}
+
     winrt::MonsterHunterWilds::ArmorKind EnumMap::ArmorKindMap(hstring const& str)
     {
         static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::ArmorKind> const armor_kind_map{
@@ -498,6 +516,224 @@ namespace winrt::MonsterHunterWilds::implementation
 
         if (auto found = light_bowgun_special_ammo_map.find(str);
             found != light_bowgun_special_ammo_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::Risk EnumMap::RiskMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::Risk> const risk_map{
+            { L"safe", winrt::MonsterHunterWilds::Risk::Safe },
+            { L"insecure", winrt::MonsterHunterWilds::Risk::Insecure },
+            { L"dangerous", winrt::MonsterHunterWilds::Risk::Dangerous }
+        };
+
+        if (auto found{ risk_map.find(str) };
+            found != risk_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+	}
+
+    winrt::MonsterHunterWilds::MonsterKind EnumMap::MonsterKindMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::MonsterKind> const monster_kind_map{
+            { L"small", winrt::MonsterHunterWilds::MonsterKind::Small },
+            { L"large", winrt::MonsterHunterWilds::MonsterKind::Large }
+        };
+
+        if (auto found{ monster_kind_map.find(str) };
+            found != monster_kind_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+	}
+
+    winrt::MonsterHunterWilds::Species EnumMap::SpeciesMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::Species> const species_map{
+            { L"flying-wyvern",  winrt::MonsterHunterWilds::Species::FlyingWyvern },
+            { L"fish",           winrt::MonsterHunterWilds::Species::Fish },
+            { L"herbivore",      winrt::MonsterHunterWilds::Species::Herbivore },
+            { L"lynian",         winrt::MonsterHunterWilds::Species::Lynian },
+            { L"neopteron",      winrt::MonsterHunterWilds::Species::Neopteron },
+            { L"carapaceon",     winrt::MonsterHunterWilds::Species::Carapaceon },
+            { L"fanged-beast",   winrt::MonsterHunterWilds::Species::FangedBeast },
+            { L"bird-wyvern",    winrt::MonsterHunterWilds::Species::BirdWyvern },
+            { L"piscine-wyvern", winrt::MonsterHunterWilds::Species::PiscineWyvern },
+            { L"leviathan",      winrt::MonsterHunterWilds::Species::Leviathan },
+            { L"brute-wyvern",   winrt::MonsterHunterWilds::Species::BruteWyvern },
+            { L"fanged-wyvern",  winrt::MonsterHunterWilds::Species::FangedWyvern },
+            { L"amphibian",      winrt::MonsterHunterWilds::Species::Amphibian },
+            { L"temnoceran",     winrt::MonsterHunterWilds::Species::Temnoceran },
+            { L"snake-wyvern",   winrt::MonsterHunterWilds::Species::SnakeWyvern },
+            { L"elder-dragon",   winrt::MonsterHunterWilds::Species::ElderDragon },
+            { L"cephalopod",     winrt::MonsterHunterWilds::Species::Cephalopod },
+            { L"construct",      winrt::MonsterHunterWilds::Species::Construct },
+            { L"wingdrake",      winrt::MonsterHunterWilds::Species::Wingdrake },
+            { L"demi-elder",     winrt::MonsterHunterWilds::Species::DemiElder },
+        };
+
+        if (auto found{ species_map.find(str) };
+            found != species_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::RewardConditionKind EnumMap::RewardConditionKindMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::RewardConditionKind> const reward_condition_kind_map{
+            { L"carve", winrt::MonsterHunterWilds::RewardConditionKind::Carve },
+            { L"carve-severed", winrt::MonsterHunterWilds::RewardConditionKind::CarveSevered },
+            { L"endemic-capture", winrt::MonsterHunterWilds::RewardConditionKind::EndemicCapture },
+            { L"target-reward", winrt::MonsterHunterWilds::RewardConditionKind::TargetReward },
+            { L"broken-part", winrt::MonsterHunterWilds::RewardConditionKind::BrokenPart },
+            { L"wound-destroyed", winrt::MonsterHunterWilds::RewardConditionKind::WoundDestroyed },
+            { L"carve-rotten", winrt::MonsterHunterWilds::RewardConditionKind::CarveRotten },
+            { L"slinger-gather", winrt::MonsterHunterWilds::RewardConditionKind::SlingerGather },
+            { L"carve-rotten-severed", winrt::MonsterHunterWilds::RewardConditionKind::CarveRottenSevered },
+            { L"tempered-wound-destroyed", winrt::MonsterHunterWilds::RewardConditionKind::TemperedWoundDestroyed },
+            { L"carve-crystallized", winrt::MonsterHunterWilds::RewardConditionKind::CarveCrystallized },
+        };
+
+        if (auto found = reward_condition_kind_map.find(str);
+            found != reward_condition_kind_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::MonsterPartKind EnumMap::MonsterPartKindMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::MonsterPartKind> const monster_part_kind_map{
+            { L"neck", winrt::MonsterHunterWilds::MonsterPartKind::Neck },
+            { L"left-front-leg", winrt::MonsterHunterWilds::MonsterPartKind::LeftFrontLeg },
+            { L"head", winrt::MonsterHunterWilds::MonsterPartKind::Head },
+            { L"right-wing-arm-wear", winrt::MonsterHunterWilds::MonsterPartKind::RightWingArmWear },
+            { L"left-wing-arm-wear", winrt::MonsterHunterWilds::MonsterPartKind::LeftWingArmWear },
+            { L"head-wear", winrt::MonsterHunterWilds::MonsterPartKind::HeadWear },
+            { L"left-wing-arm-hide", winrt::MonsterHunterWilds::MonsterPartKind::LeftWingArmHide },
+            { L"right-wing-arm-hide", winrt::MonsterHunterWilds::MonsterPartKind::RightWingArmHide },
+            { L"left-wing-arm", winrt::MonsterHunterWilds::MonsterPartKind::LeftWingArm },
+            { L"head-hide", winrt::MonsterHunterWilds::MonsterPartKind::HeadHide },
+            { L"right-wing-arm", winrt::MonsterHunterWilds::MonsterPartKind::RightWingArm },
+            { L"left-hind-leg", winrt::MonsterHunterWilds::MonsterPartKind::LeftHindLeg },
+            { L"right-hind-leg", winrt::MonsterHunterWilds::MonsterPartKind::RightHindLeg },
+            { L"torso", winrt::MonsterHunterWilds::MonsterPartKind::Torso },
+            { L"right-front-leg", winrt::MonsterHunterWilds::MonsterPartKind::RightFrontLeg },
+            { L"tail", winrt::MonsterHunterWilds::MonsterPartKind::Tail },
+            { L"tail-hair", winrt::MonsterHunterWilds::MonsterPartKind::TailHair },
+            { L"left-wing", winrt::MonsterHunterWilds::MonsterPartKind::LeftWing },
+            { L"right-leg", winrt::MonsterHunterWilds::MonsterPartKind::RightLeg },
+            { L"hide", winrt::MonsterHunterWilds::MonsterPartKind::Hide },
+            { L"right-wing", winrt::MonsterHunterWilds::MonsterPartKind::RightWing },
+            { L"left-leg", winrt::MonsterHunterWilds::MonsterPartKind::LeftLeg },
+            { L"right-nail", winrt::MonsterHunterWilds::MonsterPartKind::RightNail },
+            { L"petal", winrt::MonsterHunterWilds::MonsterPartKind::Petal },
+            { L"left-nail", winrt::MonsterHunterWilds::MonsterPartKind::LeftNail },
+            { L"poisonous-thorn", winrt::MonsterHunterWilds::MonsterPartKind::PoisonousThorn },
+            { L"mantle", winrt::MonsterHunterWilds::MonsterPartKind::Mantle },
+            { L"stomach", winrt::MonsterHunterWilds::MonsterPartKind::Stomach },
+            { L"left-wing-legs", winrt::MonsterHunterWilds::MonsterPartKind::LeftWingLegs },
+            { L"antennae", winrt::MonsterHunterWilds::MonsterPartKind::Antennae },
+            { L"right-wing-legs", winrt::MonsterHunterWilds::MonsterPartKind::RightWingLeg },
+            { L"back", winrt::MonsterHunterWilds::MonsterPartKind::Back },
+            { L"right-wing-blade", winrt::MonsterHunterWilds::MonsterPartKind::RightWingBlade },
+            { L"left-wing-blade", winrt::MonsterHunterWilds::MonsterPartKind::LeftWingBlade },
+            { L"ass", winrt::MonsterHunterWilds::MonsterPartKind::Ass },
+            { L"tongue", winrt::MonsterHunterWilds::MonsterPartKind::Tongue },
+            { L"dorsal-fin", winrt::MonsterHunterWilds::MonsterPartKind::DorsalFin },
+            { L"nose", winrt::MonsterHunterWilds::MonsterPartKind::Nose },
+            { L"tail-tip", winrt::MonsterHunterWilds::MonsterPartKind::TailTip },
+            { L"right-front-arm", winrt::MonsterHunterWilds::MonsterPartKind::RightFrontArm },
+            { L"left-hind-arm", winrt::MonsterHunterWilds::MonsterPartKind::LeftHindArm },
+            { L"left-side-arm", winrt::MonsterHunterWilds::MonsterPartKind::LeftSideArm },
+            { L"umbrella", winrt::MonsterHunterWilds::MonsterPartKind::Umbrella },
+            { L"mouth", winrt::MonsterHunterWilds::MonsterPartKind::Mouth },
+            { L"tentacle", winrt::MonsterHunterWilds::MonsterPartKind::Tentacle },
+            { L"right-side-arm", winrt::MonsterHunterWilds::MonsterPartKind::RightSideArm },
+            { L"left-front-arm", winrt::MonsterHunterWilds::MonsterPartKind::LeftFrontArm },
+            { L"right-hind-arm", winrt::MonsterHunterWilds::MonsterPartKind::RightHindArm },
+            { L"waterfilm-tail", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmTail },
+            { L"waterfilm-left-body", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmLeftBody },
+            { L"waterfilm-left-front-leg", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmLeftFrontLeg },
+            { L"waterfilm-right-head", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmRightHead },
+            { L"waterfilm-right-front-leg",winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmRightFrontLeg },
+            { L"waterfilm-right-tail", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmRightTail },
+            { L"waterfilm-left-tail", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmLeftTail },
+            { L"waterfilm-left-head", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmLeftHead },
+            { L"waterfilm-right-body", winrt::MonsterHunterWilds::MonsterPartKind::WaterfilmRightBody },
+            { L"frozen-bigcore-after", winrt::MonsterHunterWilds::MonsterPartKind::FrozenBigcoreAfter },
+            { L"frozen-core-waist", winrt::MonsterHunterWilds::MonsterPartKind::FrozenCoreWaist },
+            { L"frozen-bigcore-before", winrt::MonsterHunterWilds::MonsterPartKind::FrozenBigcoreBefore },
+            { L"chest", winrt::MonsterHunterWilds::MonsterPartKind::Chest },
+            { L"hind-legs", winrt::MonsterHunterWilds::MonsterPartKind::HindLegs },
+            { L"front-legs", winrt::MonsterHunterWilds::MonsterPartKind::FrontLegs }
+        };
+
+        if (auto found{ monster_part_kind_map.find(str) };
+            found != monster_part_kind_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::MonsterHunterWilds::KinsectEssence EnumMap::KinsectEssenceMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::KinsectEssence> const kinsect_essence_map{
+            { L"white", winrt::MonsterHunterWilds::KinsectEssence::White },
+            { L"orange", winrt::MonsterHunterWilds::KinsectEssence::Orange },
+            { L"red", winrt::MonsterHunterWilds::KinsectEssence::Red },
+            { L"green", winrt::MonsterHunterWilds::KinsectEssence::Green }
+        };
+
+        if (auto found{ kinsect_essence_map.find(str) };
+            found != kinsect_essence_map.end())
+        {
+            return found->second;
+        }
+
+        throw winrt::hresult_invalid_argument{ std::format(L"Invalid argument: {}", str) };
+    }
+
+    winrt::Windows::Foundation::IReference<winrt::MonsterHunterWilds::KinsectEssence> EnumMap::TryKinsectEssenceMap(winrt::Windows::Data::Json::JsonObject const& json_object, hstring const& key)
+    {
+        if (json_object.HasKey(key))
+        {
+            if (auto named_value{ json_object.GetNamedValue(key) };
+                named_value.ValueType() == winrt::Windows::Data::Json::JsonValueType::String)
+            {
+                return KinsectEssenceMap(named_value.GetString());
+            }
+        }
+
+        return {};
+    }
+
+    winrt::MonsterHunterWilds::DamageKind EnumMap::DamageKindMap(hstring const& str)
+    {
+        static std::unordered_map<winrt::hstring, winrt::MonsterHunterWilds::DamageKind> const damage_kind_map{
+            { L"severing", winrt::MonsterHunterWilds::DamageKind::Servering },
+            { L"blunt",     winrt::MonsterHunterWilds::DamageKind::Blunt },
+            { L"projectile",    winrt::MonsterHunterWilds::DamageKind::Projectile }
+        };
+
+        if (auto found{ damage_kind_map.find(str) };
+            found != std::end(damage_kind_map))
         {
             return found->second;
         }

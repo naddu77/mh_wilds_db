@@ -20,6 +20,9 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetCharmsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetDecorationsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetItemsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetLocationsJsonAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetMonstersJsonAsync();
+		winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetMotionValuesJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetSkillsJsonAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Data::Json::JsonArray> GetWeaponsJsonAsync();
 
@@ -28,6 +31,9 @@ namespace winrt::MonsterHunterWilds::implementation
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Charm>> GetCharmsAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Decoration>> GetDecorationsAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Item>> GetItemsAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Location>> GetLocationsAsync();
+        winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Monster>> GetMonstersAsync();
+		winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::MotionValue>> GetMotionValuesAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Skill>> GetSkillsAsync();
         winrt::Windows::Foundation::IAsyncOperation<winrt::Windows::Foundation::Collections::IVector<winrt::MonsterHunterWilds::Weapon>> GetWeaponsAsync();
 
